@@ -157,3 +157,17 @@ window.addEventListener('load', ()=>{
   }
 });
 // End smooth scroll
+
+
+// Toggle visibility of blocks with data-lang attribute
+function toggleLangBlocks(lang){
+  document.querySelectorAll('[data-lang]').forEach(el=>{
+    el.style.display = (el.dataset.lang === lang) ? '' : 'none';
+  });
+}
+toggleLangBlocks(storedLang);
+if(langSelect){
+  langSelect.addEventListener('change', e=>{
+    toggleLangBlocks(e.target.value);
+  }, {once:false});
+}

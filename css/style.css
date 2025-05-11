@@ -196,3 +196,7 @@ footer{margin-top:auto;padding:1rem;text-align:center;background:var(--bg);borde
 .nav-links a.active::after{
     transform:scaleX(1);
 }
+
+
+/* Language toggle */
+[data-lang]{display:none;}
