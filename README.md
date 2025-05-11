@@ -1,74 +1,22 @@
-# Aimadack Web
 
-Sitio web personal estático para el portafolio de Samuel Díaz ("Aimadack").
+# Aimadack - Portfolio de Samuel Díaz Reyes
 
-## ✨ Características
+Sitio web personal para mostrar proyectos, contacto y presentación profesional como desarrollador de videojuegos.
 
-- Carrusel de proyectos con flechas de navegación
-- Filtros por tipo de proyecto: Personal / Profesional
-- Diseño minimalista inspirado en [hugo.fyi](https://hugo.fyi)
-- Animaciones suaves y responsive
-- Edición sencilla desde archivo JSON
+## Estructura
 
----
+- `index.html`: Página principal (sobre mí)
+- `proyectos.html`: Lista de proyectos con links externos
+- `clasified.html`, `proyecto_base.html`, `demo_proyecto.html`: Páginas de proyectos individuales
+- `contacto.html`: Página de contacto
+- `style.css`: Estilos principales
+- `header.html`: Fragmento reutilizable del encabezado con branding
 
-## 📁 Estructura del Proyecto
+## Cómo ver localmente
 
-```
-miweb_estatica/
-├── index.html              # Página principal "Sobre mí"
-├── proyectos.html          # Carrusel de proyectos
-├── clasified.html          # Página del proyecto clasified
-├── contacto.html           # Formulario de contacto
-├── 404.html                # Página 404 retro NES
-├── proyectos.json          # 📌 Aquí editas tus proyectos
-├── style.css               # Estilos globales
-├── script.js               # JS para formularios y lógica
-└── assets/
-    ├── proyecto1.png ...   # Imágenes de los proyectos
-    └── sword.png           # Espada de la 404
-```
+1. Abre `index.html` en tu navegador
+2. O usa Live Server en VS Code
 
----
+## Autor
 
-## 🛠️ Cómo Editar Proyectos
-
-Edita el archivo `proyectos.json` con tu contenido. Ejemplo de entrada:
-
-```json
-{
-  "title": "Clasified",
-  "description": "Juego de exploración retro-futurista.",
-  "image": "assets/proyecto1.png",
-  "tag": "Personal"
-}
-```
-
-- `"title"` → Nombre del proyecto
-- `"description"` → Texto descriptivo corto
-- `"image"` → Ruta a la imagen (dentro de `assets/`)
-- `"tag"` → `"Personal"` o `"Profesional"` (usado por los filtros)
-
-Guarda los cambios y súbelos a GitHub/Netlify/etc. ¡No necesitas tocar el HTML!
-
----
-
-## 🚀 Deploy sugerido
-
-Puedes subir este sitio a:
-
-- [GitHub Pages](https://pages.github.com/)
-- [Netlify](https://netlify.com/)
-- [Vercel](https://vercel.com/)
-
----
-
-## 📌 Recomendaciones
-
-- Usa [Visual Studio Code](https://code.visualstudio.com/) con la extensión **Live Server** para ver cambios al instante.
-- Asegúrate de subir también tus imágenes a la carpeta `assets/`.
-
----
-
-## © 2025 Aimadack
-Creado con cariño y neones digitales.
+**Samuel Díaz Reyes** – Game Developer
