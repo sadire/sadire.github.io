@@ -1,169 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proyectos - Aimadack</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    .filter-buttons {
-      text-align: center;
-      margin-top: 1rem;
-    }
-
-    .filter-buttons button {
-      margin: 0.5rem;
-      padding: 0.5rem 1rem;
-      border: none;
-      background-color: #00c2ff;
-      color: #1a1a1a;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .carousel-wrapper {
-      position: relative;
-      max-width: 90%;
-      margin: auto;
-      overflow: hidden;
-      padding: 2rem 0;
-    }
-
-    .carousel {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
-
-    .project-slide {
-      min-width: 100%;
-      box-sizing: border-box;
-      padding: 1rem;
-      background: #292929;
-      border-radius: 8px;
-      text-align: center;
-    }
-
-    .project-slide img {
-      max-width: 100%;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-    }
-
-    .tags {
-      margin-top: 0.5rem;
-      font-size: 0.8rem;
-      color: #ff6ec7;
-    }
-
-    .carousel-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 2rem;
-      color: #00c2ff;
-      background: none;
-      border: none;
-      cursor: pointer;
-      z-index: 2;
-    }
-
-    .carousel-nav.left {
-      left: 10px;
-    }
-
-    .carousel-nav.right {
-      right: 10px;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyectos</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Aimadack</h1>
-  </header>
-  <nav>
-    <a href="index.html">Sobre mí</a>
-    <a href="proyectos.html">Proyectos</a>
-    <a href="clasified.html">Clasified</a>
-    <a href="contacto.html">Contacto</a>
-  </nav>
 
-  <main>
-    <h2 style="text-align:center; margin-top:1rem;">Proyectos</h2>
 
-    <div class="filter-buttons">
-      <button onclick="filterProjects('all')">Todos</button>
-      <button onclick="filterProjects('Personal')">Personales</button>
-      <button onclick="filterProjects('Profesional')">Profesionales</button>
-    </div>
+<div class="branding">
+  <div class="container">
+    <p class="dev-label">Samuel Díaz Reyes — Game Developer</p>
+  </div>
+</div>
 
-    <div class="carousel-wrapper">
-      <button class="carousel-nav left" onclick="prevSlide()">‹</button>
-      <div class="carousel" id="carousel"></div>
-      <button class="carousel-nav right" onclick="nextSlide()">›</button>
-    </div>
-  </main>
+<header class="main-header">
+  <div class="container">
+    <h1 class="site-title"><a href="index.html">Aimadack</a></h1>
+    <nav class="nav-links">
+      <a href="index.html">Sobre mí</a>
+      <a href="proyectos.html">Proyectos</a>
+      <a href="clasified.html">Clasified</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </div>
+</header>
 
-  <footer>
-    <p>&copy; 2025 Aimadack</p>
-  </footer>
-
-  <script>
-    const carousel = document.getElementById("carousel");
-    let allProjects = [];
-    let currentIndex = 0;
-    let filtered = [];
-
-    fetch("proyectos.json")
-      .then(res => res.json())
-      .then(data => {
-        allProjects = data;
-        filtered = [...allProjects];
-        renderProjects(filtered);
-      });
-
-    function renderProjects(projects) {
-      carousel.innerHTML = "";
-      projects.forEach(p => {
-        const div = document.createElement("div");
-        div.className = "project-slide";
-        div.dataset.tags = p.tag;
-        div.innerHTML = \`
-          <img src="\${p.image}" alt="\${p.title}">
-          <h3>\${p.title}</h3>
-          <p>\${p.description}</p>
-          <div class="tags">#\${p.tag}</div>
-        \`;
-        carousel.appendChild(div);
-      });
-      updateCarousel();
-    }
-
-    function filterProjects(tag) {
-      if (tag === "all") {
-        filtered = [...allProjects];
-      } else {
-        filtered = allProjects.filter(p => p.tag === tag);
-      }
-      currentIndex = 0;
-      renderProjects(filtered);
-    }
-
-    function updateCarousel() {
-      const width = carousel.offsetWidth;
-      carousel.style.transform = \`translateX(-\${currentIndex * width}px)\`;
-    }
-
-    function nextSlide() {
-      currentIndex = (currentIndex + 1) % filtered.length;
-      updateCarousel();
-    }
-
-    function prevSlide() {
-      currentIndex = (currentIndex - 1 + filtered.length) % filtered.length;
-      updateCarousel();
-    }
-
-    window.addEventListener("resize", updateCarousel);
-  </script>
+<main class="container">
+  <h2>Proyectos</h2>
+  <p>Contenido pendiente.</p>
+</main>
 </body>
 </html>

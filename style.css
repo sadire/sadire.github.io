@@ -1,16 +1,33 @@
 
-header {
-  background: transparent;
-  box-shadow: none;
-  padding: 20px;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #fefefe;
+  color: #222;
+  line-height: 1.6;
 }
 
+.branding {
+  background: #f4f4f4;
+  padding: 0.3rem 2rem;
+  font-size: 0.9rem;
+  color: #555;
+  border-bottom: 1px solid #ddd;
+}
+
+.branding .container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.dev-label {
+  margin: 0;
+}
 
 .main-header {
   background: transparent;
   border-bottom: 1px solid #ddd;
   padding: 1rem 2rem;
-  font-family: 'Segoe UI', sans-serif;
 }
 
 .main-header .container {

@@ -1,164 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aimadack</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      background: #f9f9f9;
-      color: #1a1a1a;
-      line-height: 1.6;
-    }
-
-    header, section, footer {
-      max-width: 900px;
-      margin: auto;
-      padding: 4rem 2rem;
-    }
-
-    header {
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    h2 {
-      font-size: 2rem;
-      margin-top: 3rem;
-    }
-
-    nav {
-      text-align: center;
-      padding: 1rem 0;
-      border-bottom: 1px solid #ccc;
-    }
-
-    nav a {
-      margin: 0 1rem;
-      text-decoration: none;
-      color: #1a1a1a;
-      font-weight: bold;
-    }
-
-    .project-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-
-    .project-card {
-      background: white;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    .project-card img {
-      width: 100%;
-      border-radius: 4px;
-    }
-
-    .project-card h3 {
-      margin-top: 1rem;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #666;
-    }
-
-    @media(max-width: 700px) {
-      .project-list {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre mí</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav>
-    <a href="#sobre">Sobre mí</a>
-    <a href="#proyectos">Proyectos</a>
-    <a href="#contacto">Contacto</a>
-  </nav>
-
-  
-  <section id="about" style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:2rem;">
-    <div style="flex:0 0 200px;">
-      <img src="assets/aimadack_foto.png" alt="Aimadack" style="width:100%;border-radius:8px;" />
-    </div>
-    <div style="flex:1 1 500px;">
-      <h2>Sobre mí</h2>
-      <p>Soy Samuel Díaz, también conocido como <strong>Aimadack</strong>. Diseñador de juegos, desarrollador técnico y narrador interactivo.</p>
-      <p>Trabajo creando mundos, sistemas y experiencias que combinan lo narrativo con lo interactivo. Desde instalaciones hasta videojuegos, mi foco está en conectar emoción, diseño y tecnología.</p>
-      <p>He trabajado en experiencias personales como <em>Clasified</em>, y colaborado en entornos profesionales con simulaciones, VR y visualización interactiva.</p>
-      <p>Actualmente enfocado en proyectos que exploran la agencia, el cuerpo y la estética de sistemas no lineales.</p>
-    
-      <div style="margin-top: 1rem;">
-        <a href="mailto:contacto@aimadack.com" style="margin-right: 1rem;">✉️</a>
-        <a href="https://linkedin.com/in/aimadack" target="_blank" style="margin-right: 1rem;">LinkedIn</a>
-        <a href="https://github.com/aimadack" target="_blank" style="margin-right: 1rem;">GitHub</a>
-        <a href="https://twitter.com/aimadack" target="_blank" style="margin-right: 1rem;">Twitter</a>
-      </div>
-    </div> <!-- cierre del div de texto -->
-
-  </section>
 
 
-  <section id="proyectos">
-    <h2>Proyectos</h2>
-    <div class="project-list">
-      <div class="project-card">
-        <img src="assets/proyecto1.png" alt="Clasified" />
-        <h3>Clasified</h3>
-        <p>Una aventura narrativa ambientada en un mundo retro-futurista.</p>
-      </div>
-      <div class="project-card">
-        <img src="assets/proyecto2.png" alt="Simulador Botánico" />
-        <h3>Simulador Botánico</h3>
-        <p>Visualiza cultivos reales con sensores e IA emocional.</p>
-      </div>
-      <div class="project-card">
-        <img src="assets/proyecto3.png" alt="Juego VR" />
-        <h3>Juego VR Experimental</h3>
-        <p>Explora mundos usando solo tus manos. Pura inmersión sin mandos.</p>
-      </div>
-      <div class="project-card">
-        <img src="assets/proyecto4.png" alt="Mente Modular" />
-        <h3>Mente Modular</h3>
-        <p>Puzzle mental con narrativa emergente y lógica fractal.</p>
-      </div>
-    
-      <div style="margin-top: 1rem;">
-        <a href="mailto:contacto@aimadack.com" style="margin-right: 1rem;">✉️</a>
-        <a href="https://linkedin.com/in/aimadack" target="_blank" style="margin-right: 1rem;">LinkedIn</a>
-        <a href="https://github.com/aimadack" target="_blank" style="margin-right: 1rem;">GitHub</a>
-        <a href="https://twitter.com/aimadack" target="_blank" style="margin-right: 1rem;">Twitter</a>
-      </div>
-    </div> <!-- cierre del div de texto -->
+<div class="branding">
+  <div class="container">
+    <p class="dev-label">Samuel Díaz Reyes — Game Developer</p>
+  </div>
+</div>
 
-  </section>
+<header class="main-header">
+  <div class="container">
+    <h1 class="site-title"><a href="index.html">Aimadack</a></h1>
+    <nav class="nav-links">
+      <a href="index.html">Sobre mí</a>
+      <a href="proyectos.html">Proyectos</a>
+      <a href="clasified.html">Clasified</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </div>
+</header>
 
-  <section id="contacto">
-    <h2>Contacto</h2>
-    <p>Puedes escribirme a través del formulario o encontrarme en redes.</p>
-    <form>
-      <input type="email" placeholder="Tu email" required style="width:100%;padding:0.5rem;margin:1rem 0;">
-      <textarea placeholder="Tu mensaje" required style="width:100%;padding:0.5rem;height:120px;"></textarea>
-      <button type="submit" style="padding:0.7rem 1.5rem;background:#1a1a1a;color:#fff;border:none;border-radius:4px;">Enviar</button>
-    </form>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Aimadack — Todos los derechos reservados.</p>
-  </footer>
+<main class="container">
+  <h2>Sobre mí</h2>
+  <p>Contenido pendiente.</p>
+</main>
 </body>
 </html>
