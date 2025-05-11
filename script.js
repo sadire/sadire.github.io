@@ -1,61 +1,39 @@
 
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector("form");
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const btn = form.querySelector("button");
-      btn.textContent = "¡Enviado! ✉️";
-      btn.disabled = true;
-      setTimeout(() => {
-        btn.textContent = "Enviar";
-        btn.disabled = false;
-        form.reset();
-      }, 3000);
-    });
-  }
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  const detailsSection = document.getElementById("project-details");
-  const cards = document.querySelectorAll(".project-card");
-
-  const projects = {
-    clasified: {
-      title: "Clasified",
-      desc: "Un juego de exploración narrativa con estética retro-futurista. En un mundo donde los recuerdos se imprimen en vinilo, deberás descubrir qué es real.",
-      img: "assets/proyecto1.png"
-    },
-    botanico: {
-      title: "Simulador Botánico",
-      desc: "Simulación interactiva de cultivos con IA emocional. ¿Las plantas sienten? Esta responde con colores, crecimiento y patrones únicos.",
-      img: "assets/proyecto2.png"
-    },
-    vr: {
-      title: "Juego VR Experimental",
-      desc: "Control total sin mandos: usa tus manos para explorar mundos extraños donde la gravedad es un rumor y los gatos dominan la física cuántica.",
-      img: "assets/proyecto3.png"
-    }
-  };
-
-  cards.forEach((card, index) => {
-    card.addEventListener("click", () => {
-      const key = Object.keys(projects)[index];
-      const project = projects[key];
-      detailsSection.innerHTML = `
-        <div class="details-content">
-          <div class="media">
-            <img src="${project.img}" alt="${project.title}" />
-          </div>
-          <div class="text">
-            <h3>${project.title}</h3>
-            <p>${project.desc}</p>
-          </div>
-        </div>
-      `;
-      detailsSection.style.display = "block";
-      detailsSection.scrollIntoView({ behavior: "smooth" });
-    });
+fetch("proyectos.json")
+  .then(res => res.json())
+  .then(data => {
+    allProjects = data;
+    filtered = [...allProjects];
+    renderProjects(filtered);
   });
-});
+
+function renderProjects(projects) {
+  carousel.innerHTML = "";
+  projects.forEach((p, i) => {
+    const div = document.createElement("div");
+    div.className = "project-slide";
+    div.dataset.tags = p.tag;
+
+    // Ruta simulada (solo para primeros 2 proyectos)
+    let linkStart = "";
+    let linkEnd = "";
+    if (i === 0) {
+      linkStart = '<a href="clasified.html">';
+      linkEnd = '</a>';
+    } else if (i === 1) {
+      linkStart = '<a href="proyecto_base.html">';
+      linkEnd = '</a>';
+    }
+
+    div.innerHTML = \`
+      \${linkStart}
+      <img src="\${p.image}" alt="\${p.title}">
+      <h3>\${p.title}</h3>
+      <p>\${p.description}</p>
+      <div class="tags">#\${p.tag}</div>
+      \${linkEnd}
+    \`;
+    carousel.appendChild(div);
+  });
+  updateCarousel();
+}
