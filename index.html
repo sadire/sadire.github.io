@@ -2,34 +2,83 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sobre mí</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samuel Díaz Reyes — Game Developer</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-
-<div class="branding">
-  <div class="container">
-    <p class="dev-label">Samuel Díaz Reyes — Game Developer</p>
-  </div>
-</div>
-
 <header class="main-header">
-  <div class="container">
-    <h1 class="site-title"><a href="index.html">Aimadack</a></h1>
+  <div class="container header-content">
+    <div class="branding">
+      <span class="dev-label">Samuel Díaz — Game Developer</span>
+    </div>
     <nav class="nav-links">
-      <a href="index.html">Sobre mí</a>
-      <a href="proyectos.html">Proyectos</a>
-      <a href="clasified.html">Clasified</a>
-      <a href="contacto.html">Contacto</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#contacto">Contacto</a>
     </nav>
   </div>
 </header>
 
-<main class="container">
-  <h2>Sobre mí</h2>
-  <p>Contenido pendiente.</p>
-</main>
+
+
+<section id="sobre-mi" class="about-section container">
+  <div class="about-content">
+    <div class="about-photo">
+      <img src="assets/aimadack_foto.png" alt="Foto de Samuel" />
+    </div>
+    <div class="about-text">
+      <h2>Hola, soy Samuel Díaz</h2>
+      <p>
+        Soy desarrollador de videojuegos centrado en diseño técnico, herramientas y dirección de producto. Me apasiona crear experiencias que mezclen estética y función.
+      </p>
+      
+<div class="social-icons">
+  <a href="https://www.linkedin.com/in/samuel-diazreyes/" target="_blank" title="LinkedIn">
+    <svg viewBox="0 0 24 24" class="icon"><path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.8v2.1h.1c.5-1 1.7-2.1 3.6-2.1 3.8 0 4.5 2.5 4.5 5.8V24h-4v-7.4c0-1.8 0-4.2-2.6-4.2s-3 2-3 4.1V24h-4V8.5z"/></svg>
+  </a>
+  <a href="#" target="_blank" title="GitHub">
+    <svg viewBox="0 0 24 24" class="icon"><path d="M12 .5C5.37.5 0 5.87 0 12.48c0 5.28 3.44 9.75 8.2 11.33.6.12.82-.26.82-.58v-2.02c-3.34.72-4.04-1.43-4.04-1.43-.54-1.38-1.32-1.74-1.32-1.74-1.08-.76.08-.74.08-.74 1.2.08 1.84 1.26 1.84 1.26 1.06 1.82 2.78 1.3 3.46.98.1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.96 0-1.32.47-2.4 1.24-3.24-.12-.3-.54-1.52.12-3.18 0 0 1.01-.33 3.3 1.23.96-.27 1.98-.4 3-.4s2.04.14 3 .4c2.28-1.56 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.92 1.24 3.24 0 4.63-2.8 5.66-5.48 5.96.44.38.82 1.1.82 2.22v3.3c0 .32.22.7.82.58A12 12 0 0 0 24 12.48C24 5.87 18.63.5 12 .5z"/></svg>
+  </a>
+  <a href="#" target="_blank" title="Itch.io">
+    <svg viewBox="0 0 24 24" class="icon"><path d="M3 6L0 9v9h3v3h9v-3h9v-9l-3-3zm1.875 1.125h14.25l1.5 1.5v6.75h-3v-3H6.375v3h-3v-6.75zm5.25 3.75h2.25v1.5h-2.25z"/></svg>
+  </a>
+  <a href="mailto:samuel@example.com" title="Email">
+    <svg viewBox="0 0 24 24" class="icon"><path d="M1.5 4.5h21c.825 0 1.5.675 1.5 1.5v12c0 .825-.675 1.5-1.5 1.5h-21c-.825 0-1.5-.675-1.5-1.5v-12c0-.825.675-1.5 1.5-1.5zm10.5 7.5l9-6h-18l9 6zm0 1.5l-9-6v10.5h18v-10.5l-9 6z"/></svg>
+  </a>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<section id="proyectos" class="container projects-section">
+  <h2>Proyectos</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <a href="clasified.html" target="_blank">
+        <img src="assets/proyecto1.png" alt="Clasified">
+        <h3>Clasified</h3>
+        <p>Proyecto secreto en desarrollo.</p>
+      </a>
+    </div>
+    <div class="project-card">
+      <a href="proyecto_base.html" target="_blank">
+        <img src="assets/proyecto2.png" alt="Simulador Botánico">
+        <h3>Simulador Botánico</h3>
+        <p>Plantas que responden a tus decisiones.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="container">
+  <h2>Contacto</h2>
+  <p>En construcción. Puedes escribirme a <a href="mailto:samuel@example.com">samuel@example.com</a></p>
+</section>
+
+<script src="script.js"></script>
 </body>
 </html>
