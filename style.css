@@ -322,3 +322,16 @@ button:hover {
   font-size: 0.85rem;
   font-weight: bold;
 }
+
+/* Contenedor más ancho, tipo Dean Tate */
+header, section, footer {
+  max-width: 1200px;
+  margin: auto;
+  padding: 4rem 2rem;
+}
+
+nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem 0;
+}

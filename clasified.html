@@ -3,34 +3,157 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clasified - Aimadack</title>
+  <title>Clasified – Aimadack</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #ffffff;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 6rem 2rem 3rem;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #555;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    .feature {
+      text-align: center;
+    }
+
+    .feature img {
+      width: 80px;
+      margin-bottom: 1rem;
+    }
+
+    .media {
+      text-align: center;
+      margin: 4rem 0;
+    }
+
+    .media img {
+      max-width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .cta {
+      text-align: center;
+      margin: 3rem 0;
+    }
+
+    .cta a {
+      background: #005f99;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .footer-socials {
+      text-align: center;
+      margin: 4rem 0 2rem;
+    }
+
+    .footer-socials a {
+      margin: 0 1rem;
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      fill: #555;
+      transition: fill 0.3s ease;
+    }
+
+    .footer-socials a:hover {
+      fill: #005f99;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-bottom: 2rem;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Aimadack</h1>
-    <nav>
-      
-    </nav>
-  </header>
+  <section class="hero">
+    <h1>Clasified</h1>
+    <p>Una experiencia narrativa donde los secretos están en los silencios y las cintas antiguas.</p>
+  </section>
 
-<nav>
-  <a href="index.html">Sobre mí</a>
-  <a href="proyectos.html">Proyectos</a>
-  <a href="clasified.html">Clasified</a>
-  <a href="contacto.html">Contacto</a>
-</nav>
+  <div class="media">
+    <img src="assets/proyecto1.png" alt="Clasified teaser">
+  </div>
 
+  <section class="features">
+    <div class="feature">
+      <img src="assets/sword.png" alt="Inmersivo" />
+      <h3>Exploración Atmosférica</h3>
+      <p>Adéntrate en entornos cargados de historia.</p>
+    </div>
+    <div class="feature">
+      <img src="assets/sword.png" alt="Narrativa" />
+      <h3>Narrativa Fragmentada</h3>
+      <p>Descubre la verdad a través de cintas, objetos y decisiones.</p>
+    </div>
+    <div class="feature">
+      <img src="assets/sword.png" alt="Estética" />
+      <h3>Estética Retro-Tech</h3>
+      <p>Inspirado en tecnologías analógicas, VHS y ruido estático.</p>
+    </div>
+  </section>
 
-  <main>
-    <section>
-      <h2>Clasified</h2>
-      <p>Este es un proyecto en curso. Próximamente compartiré más información sobre su diseño, mecánicas y desarrollo técnico.</p>
-    </section>
-  </main>
+  <section style="max-width: 1000px; margin: 0 auto 4rem; padding: 0 2rem;">
+    <h2 style="text-align: center; margin-bottom: 2rem;">Pilares del diseño</h2>
+    <ul style="list-style-type: disc; padding-left: 1.5rem; font-size: 1.1rem; line-height: 1.8;">
+      <li><strong>Atmósfera narrativa:</strong> ambientación por capas, objetos, sonido y ausencia de interfaz.</li>
+      <li><strong>Exploración no guiada:</strong> sin marcadores, todo lo que encuentras es por curiosidad.</li>
+      <li><strong>Fragmentación:</strong> el mundo y su historia están rotos, y se reconstruyen desde lo sensorial.</li>
+      <li><strong>Materialidad tecnológica:</strong> cintas, estática, ruido, señales físicas. Lo digital es analógico.</li>
+    </ul>
+  </section>
+
+  <div class="cta">
+    <a href="https://aimadack.itch.io/clasified" target="_blank">Ver en Itch.io</a>
+  </div>
+
+  <div class="footer-socials">
+    <a href="mailto:contacto@aimadack.com" title="Email">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 2v.511l-8 5.333-8-5.333V6h16zM4 18V8.489l7.555 5.036a1 1 0 001.11 0L20 8.489V18H4z"/></svg>
+    </a>
+    <a href="https://linkedin.com/in/aimadack" target="_blank" title="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.001 5.001A2.5 2.5 0 014.98 3.5zM3 8.98h4v12H3v-12zm7 0h3.8v1.704h.054c.53-.998 1.825-2.048 3.756-2.048 4.02 0 4.76 2.648 4.76 6.092v6.252h-4v-5.536c0-1.321-.023-3.022-1.844-3.022-1.846 0-2.127 1.445-2.127 2.937v5.621h-4v-12z"/></svg>
+    </a>
+    <a href="https://aimadack.itch.io" target="_blank" title="Itch.io">
+      <svg viewBox="0 0 512 512"><path d="M64 64v96h80c13.3 0 24 10.7 24 24v160c0 13.3-10.7 24-24 24H64v80h384v-80h-80c-13.3 0-24-10.7-24-24V184c0-13.3 10.7-24 24-24h80V64H64zm208 144a48 48 0 110 96 48 48 0 010-96z"/></svg>
+    </a>
+  </div>
 
   <footer>
-    <p>&copy; 2025 Aimadack</p>
+    &copy; 2025 Aimadack. Todos los derechos reservados.
   </footer>
 </body>
 </html>
