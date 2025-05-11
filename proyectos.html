@@ -18,6 +18,7 @@
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       transition: transform 0.2s;
+      cursor: pointer;
     }
     .project-card:hover {
       transform: translateY(-4px);
@@ -30,9 +31,37 @@
     .project-card .content {
       padding: 1rem;
     }
-    .project-card h3 {
+
+    #project-details {
+      display: none;
+      padding: 2rem 0;
+      border-top: 2px dashed #ccc;
+      margin-top: 2rem;
+    }
+
+    .details-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .details-content .media {
+      flex: 1 1 40%;
+    }
+
+    .details-content .media img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .details-content .text {
+      flex: 1 1 55%;
+    }
+
+    .details-content h3 {
       margin-top: 0;
-      font-size: 1.1rem;
     }
   </style>
 </head>
@@ -55,29 +84,73 @@
           <img src="assets/proyecto1.png" alt="Proyecto 1" />
           <div class="content">
             <h3>Clasified</h3>
-            <p>Proyecto actual centrado en narrativa y exploración. <a href="clasified.html">Ver más →</a></p>
+            <p>Proyecto actual centrado en narrativa y exploración.</p>
           </div>
         </div>
         <div class="project-card">
           <img src="assets/proyecto2.png" alt="Proyecto 2" />
           <div class="content">
             <h3>Simulador Botánico</h3>
-            <p>Plantas que responden a tus decisiones. Integración con sensores reales.</p>
+            <p>Plantas que responden a tus decisiones.</p>
           </div>
         </div>
         <div class="project-card">
           <img src="assets/proyecto3.png" alt="Proyecto 3" />
           <div class="content">
             <h3>Juego VR Experimental</h3>
-            <p>Explora mundos de forma inmersiva usando sólo tus manos.</p>
+            <p>Explora mundos con solo tus manos.</p>
           </div>
         </div>
       </div>
     </section>
+
+    <section id="project-details"></section>
   </main>
 
   <footer>
     <p>&copy; 2025 Aimadack</p>
   </footer>
+  <script>document.addEventListener("DOMContentLoaded", () => {
+  const detailsSection = document.getElementById("project-details");
+  const cards = document.querySelectorAll(".project-card");
+
+  const projects = {
+    clasified: {
+      title: "Clasified",
+      desc: "Un juego de exploración narrativa con estética retro-futurista. En un mundo donde los recuerdos se imprimen en vinilo, deberás descubrir qué es real.",
+      img: "assets/proyecto1.png"
+    },
+    botanico: {
+      title: "Simulador Botánico",
+      desc: "Simulación interactiva de cultivos con IA emocional. ¿Las plantas sienten? Esta responde con colores, crecimiento y patrones únicos.",
+      img: "assets/proyecto2.png"
+    },
+    vr: {
+      title: "Juego VR Experimental",
+      desc: "Control total sin mandos: usa tus manos para explorar mundos extraños donde la gravedad es un rumor y los gatos dominan la física cuántica.",
+      img: "assets/proyecto3.png"
+    }
+  };
+
+  cards.forEach((card, index) => {
+    card.addEventListener("click", () => {
+      const key = Object.keys(projects)[index];
+      const project = projects[key];
+      detailsSection.innerHTML = `
+        <div class="details-content">
+          <div class="media">
+            <img src="${project.img}" alt="${project.title}" />
+          </div>
+          <div class="text">
+            <h3>${project.title}</h3>
+            <p>${project.desc}</p>
+          </div>
+        </div>
+      `;
+      detailsSection.style.display = "block";
+      detailsSection.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+});</script>
 </body>
 </html>
