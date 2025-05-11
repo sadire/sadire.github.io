@@ -72,3 +72,116 @@ nav a:hover {
     padding: 0.5rem 0;
   }
 }
+
+/* Paleta Retro-Futurista Minimal */
+body {
+  background: #0D0D0D;
+  color: #F5F5F5;
+}
+header {
+  background: #0D0D0D;
+  color: #F5F5F5;
+}
+nav {
+  background-color: #0D0D0D;
+  border-bottom: 2px solid #00FFE0;
+}
+nav a {
+  color: #F5F5F5;
+}
+nav a:hover {
+  color: #00FFE0;
+}
+button {
+  background-color: #00FFE0;
+  color: #0D0D0D;
+}
+footer {
+  background: #0D0D0D;
+  color: #FF0080;
+}
+.project-card {
+  background: #1A1A1A;
+  color: #F5F5F5;
+}
+.project-card:hover {
+  border: 1px solid #00FFE0;
+}
+#project-details {
+  border-top: 2px dashed #FF0080;
+}
+.details-content .media img {
+  border: 2px solid #00FFE0;
+}
+
+/* ANIMACIONES SUAVES Y MICROINTERACCIONES */
+* {
+  transition: all 0.3s ease;
+}
+
+.project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 255, 224, 0.2);
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.details-content {
+  animation: fadeSlide 0.5s ease-out;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* EFECTO DE ENTRADA AL CARGAR LA WEB */
+body {
+  opacity: 0;
+  animation: fadeInBody 1s ease forwards;
+}
+
+@keyframes fadeInBody {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Fade con slide para cada tarjeta */
+.project-card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideCard 0.6s ease forwards;
+}
+
+.project-card:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.project-card:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.project-card:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes fadeSlideCard {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
