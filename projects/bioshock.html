@@ -8,14 +8,8 @@
 <link href="../css/style.css" rel="stylesheet"/>
 <link href="../favicon.ico" rel="icon" type="image/x-icon"/>
 </head>
-<body>
-<nav>
-<div class="logo">Samuel Díaz <span class="subtitle">Game Developer</span></div>
-<a href="../index.html#projects" style="text-decoration:none">← Volver</a>
-<select id="lang-select">
-<option value="es">🇪🇸 ES</option>
-<option value="en">🇬🇧 EN</option>
-</select></nav>
+<body><nav><div class="logo">Samuel Díaz <span class="subtitle">Game Developer</span></div><button aria-label="Menu" class="burger" id="burger">☰</button><ul class="nav-links"><a data-i18n="about" href="./index.html#about">Sobre mí</a><a data-i18n="projects" href="./index.html#projects">Proyectos</a><a data-i18n="unannounced" href="./unannounced.html">Sin anunciar</a><a data-i18n="resume" href="../resume.html">Currículum</a></ul><select id="lang-select"><option value="es">🇪🇸 ES</option><option value="en">🇬🇧 EN</option></select></nav>
+
 <section class="project-header">
 <h1>Bioshock</h1>
 <p>Aclamado título que redefine la narrativa interactiva en mundos distópicos.</p>
@@ -27,7 +21,7 @@
 </div>
 </section>
 <section class="project-contrib">
-<h2>Qué hice</h2>
+<h2 data-i18n="what_i_did">Qué hice</h2>
 <div class="text-gallery">
 <div class="proj-text">
 <p>Planifiqué, diseñé e implementé mecánicas clave que conectan con la narrativa y mantienen al jugador comprometido.</p>
@@ -39,13 +33,11 @@
 </div>
 </div>
 </section>
-<section class="flex-split-section"><h2>Desafíos y soluciones</h2><div class="flex-split">
-
+<section class="flex-split-section"><h2 data-i18n="challenges">Desafíos y soluciones</h2><div class="flex-split">
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula dignissim nunc, et consequat odio euismod non. Cras vitae ante vel massa facilisis sagittis.</p>
 <img alt="Challenge solution" src="../images/gallery3.png"/>
 </div></section>
-<section class="flex-split-section"><h2>Trivia</h2><div class="flex-split">
-
+<section class="flex-split-section"><h2 data-i18n="trivia">Trivia</h2><div class="flex-split">
 <p>Dato curioso: este proyecto incluye un huevo de pascua secreto que solo un 2% de los jugadores ha descubierto.</p>
 <img alt="Trivia image" src="../images/gallery2.png"/>
 </div></section>

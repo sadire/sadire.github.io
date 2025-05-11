@@ -1,5 +1,14 @@
 const translations = {
   en: {
+        awards: "Awards",
+        skills: "Skills",
+        summary: "Professional Summary",
+        current_state: "Current State",
+        unannounced_title: "Unannounced Project",
+        education: "Education",
+        work_exp: "Work Experience",
+        download_pdf: "Download PDF",
+        resume: "Resume",
     about: "About",
     projects: "Projects",
     unannounced: "Unannounced",
@@ -7,10 +16,23 @@ const translations = {
     about_body: "I am a level and game designer, artist, and creative collaborator with 16 years of experience crafting worlds and gameplay that spark the joy of imagination.",
     projects_title: "Projects",
     card1_body: "A joyful space shooter where creativity meets chaos.",
-    card2_body: "A deep-sea dystopian adventure revered worldwide.",
-    what_i_did: "What I Did"
+    card2_body: "A deep‑sea dystopian adventure revered worldwide.",
+    what_i_did: "What I Did",
+    challenges: "Challenges & Solutions",
+    trivia: "Trivia",
+    current_state: "Current State",
+    vision: "Vision"
   },
   es: {
+        awards: "Premios y reconocimientos",
+        skills: "Competencias",
+        summary: "Resumen profesional",
+        current_state: "Estado actual",
+        unannounced_title: "Proyecto sin anunciar",
+        education: "Formación académica",
+        work_exp: "Experiencia laboral",
+        download_pdf: "Descargar PDF",
+        resume: "Currículum",
     about: "Sobre mí",
     projects: "Proyectos",
     unannounced: "Sin anunciar",
@@ -19,20 +41,68 @@ const translations = {
     projects_title: "Proyectos",
     card1_body: "Un shooter espacial colorido donde la creatividad se encuentra con el caos.",
     card2_body: "Una aventura distópica submarina aclamada mundialmente.",
-    what_i_did: "Qué hice"
+    what_i_did: "Qué hice",
+    challenges: "Desafíos y soluciones",
+    trivia: "Trivia",
+    current_state: "Estado actual",
+    vision: "Visión"
   }
 };
+
 const langSelect = document.getElementById('lang-select');
-const elements = document.querySelectorAll('[data-i18n]');
+
+// Persist language choice
+const storedLang = localStorage.getItem('lang') || (langSelect ? langSelect.value : 'es');
+if(langSelect) langSelect.value = storedLang;
+
 function updateLang(lang){
-  elements.forEach(el=>{
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key = el.dataset.i18n;
     if(translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
   });
-  document.documentElement.lang = lang;
 }
-langSelect.addEventListener('change',e=>{
-  updateLang(e.target.value);
+
+updateLang(storedLang);
+
+if(langSelect){
+  langSelect.addEventListener('change',e=>{
+    const newLang = e.target.value;
+    localStorage.setItem('lang', newLang);
+    updateLang(newLang);
+  });
+}
+
+// Burger menu toggle (kept)
+const burgerBtn = document.getElementById('burger');
+if(burgerBtn){
+  burgerBtn.addEventListener('click', ()=>{
+    document.querySelector('.nav-links').classList.toggle('open');
+  });
+}
+
+
+// Set active nav link based on current path
+document.querySelectorAll('.nav-links a').forEach(link=>{
+  const linkPath = link.getAttribute('href').replace(/\.\./g,'').replace(/index\.html/,'');
+  if(window.location.pathname.endsWith(linkPath) || (window.location.pathname.endsWith('/') && linkPath==='')){
+    link.classList.add('active');
+  }
 });
-// Initialize
-updateLang(langSelect.value);
+
+// Highlight active page link
+(function(){
+  const currentPath = window.location.pathname.replace(/\/index\.html$/, '').replace(/\/$/, '');
+  document.querySelectorAll('.nav-links a').forEach(link=>{
+    const url = new URL(link.href, window.location.origin);
+    let linkPath = url.pathname.replace(/\/index\.html$/, '').replace(/\/$/, '');
+    // For root index sections (#about etc.) treat as same page
+    if(currentPath === '' && (link.hash === '#about' || link.hash === '#projects')){
+      if(link.hash === window.location.hash || (window.location.hash==='' && link.hash==='#about')){
+        link.classList.add('active');
+      }
+    }else if(linkPath === currentPath){
+      link.classList.add('active');
+    }
+  });
+})();

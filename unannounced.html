@@ -8,19 +8,12 @@
 <link href="css/style.css" rel="stylesheet"/>
 <link href="favicon.ico" rel="icon" type="image/x-icon"/>
 </head>
-<body>
-<nav>
-<div class="logo">Samuel Díaz <span class="subtitle">Game Developer</span></div>
-<a href="index.html#projects" style="text-decoration:none">← Volver</a>
-<select id="lang-select">
-<option value="es">🇪🇸 ES</option>
-<option value="en">🇬🇧 EN</option>
-</select></nav>
+<body><nav><div class="logo">Samuel Díaz <span class="subtitle">Game Developer</span></div><button aria-label="Menu" class="burger" id="burger">☰</button><ul class="nav-links"><a data-i18n="about" href="./index.html#about">Sobre mí</a><a data-i18n="projects" href="./index.html#projects">Proyectos</a><a data-i18n="unannounced" href="./unannounced.html">Sin anunciar</a><a data-i18n="resume" href="../resume.html">Currículum</a></ul><select id="lang-select"><option value="es">🇪🇸 ES</option><option value="en">🇬🇧 EN</option></select></nav>
 <header>
 <img alt="Unannounced header" src="images/unannounced_header.png" style="width:100%;aspect-ratio:16/9;object-fit:cover;"/>
 </header>
 <section class="project-header">
-<h1>Unannounced Project</h1>
+<h1 data-i18n="unannounced_title">Unannounced Project</h1>
 <p>Proyecto en desarrollo: una aventura inmersiva que combina exploración y narrativa procedural.</p>
 </section>
 <section class="project-media">
@@ -30,7 +23,7 @@
 </div>
 </section>
 <section class="project-contrib">
-<h2>Estado actual</h2>
+<h2 data-i18n="current_state">Estado actual</h2>
 <div class="text-gallery">
 <div class="proj-text">
 <p>Con un motor propio, estamos empujando los límites de la IA para crear personajes que reaccionan de forma natural.</p>
@@ -41,8 +34,7 @@
 </div>
 </div>
 </section>
-<section class="flex-split-section"><h2>Visión</h2><div class="flex-split">
-
+<section class="flex-split-section"><h2 data-i18n="vision">Visión</h2><div class="flex-split">
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula dignissim nunc, et consequat odio euismod non. Cras vitae ante vel massa facilisis sagittis.</p>
 <img alt="Concept art 2" src="images/unannounced_2.png"/>
 </div></section>
