@@ -4,3 +4,42 @@ header {
   box-shadow: none;
   padding: 20px;
 }
+
+
+.main-header {
+  background: transparent;
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.main-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.site-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.site-title a {
+  text-decoration: none;
+  color: #111;
+}
+
+.nav-links a {
+  margin-left: 1.2rem;
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #007acc;
+}
