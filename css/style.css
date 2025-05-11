@@ -312,3 +312,15 @@ body.lang-ready body.lang-ready [data-lang]{display:none;}
 .download-btn:hover{
     opacity:0.8;
 }
+/* --- FIX: overlay solo para móvil --- */
+@media (min-width: 768px){
+  .menu-overlay{
+    display:none !important;        /* nunca se muestra en desktop */
+  }
+}
+
+/* --- Opcional: garantizar que el nav quede encima si alguna vez lo necesitas --- */
+nav{
+  position:relative;               /* ya lo tienes, pero lo recuerdo */
+  z-index:30;                      /* más alto que el overlay (15) */
+}
