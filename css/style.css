@@ -109,3 +109,12 @@ footer{margin-top:auto;padding:1rem;text-align:center;background:var(--bg);borde
     .flex-split{flex-direction:row;}
 }
 .media-text{display:flex;flex-direction:column;gap:0.75rem;}
+
+/* ABOUT ROW */
+@media(min-width:768px){
+    .about-section{
+        flex-direction:row;
+        text-align:left;
+        align-items:flex-start;
+    }
+}
