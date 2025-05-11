@@ -227,3 +227,23 @@ footer {
 .details-content .media img {
   border: 2px solid #00c2ff;
 }
+
+/* Ajustes para evitar doble barra visual */
+body, header, nav {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 1rem 0;
+  text-align: center;
+}
+
+nav {
+  padding: 0.5rem 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  background-color: #1a1a1a;
+  border-bottom: 2px solid #00c2ff;
+}

@@ -10,6 +10,7 @@
       text-align: center;
       margin-top: 1rem;
     }
+
     .filter-buttons button {
       margin: 0.5rem;
       padding: 0.5rem 1rem;
@@ -19,37 +20,59 @@
       cursor: pointer;
       font-weight: bold;
     }
+
+    .carousel-wrapper {
+      position: relative;
+      max-width: 90%;
+      margin: auto;
+      overflow: hidden;
+      padding: 2rem 0;
+    }
+
     .carousel {
       display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      gap: 2rem;
-      padding: 2rem;
-      scroll-behavior: smooth;
+      transition: transform 0.5s ease;
     }
+
     .project-slide {
-      flex: 0 0 80%;
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 1rem;
       background: #292929;
       border-radius: 8px;
-      padding: 1rem;
-      scroll-snap-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      text-align: center;
     }
+
     .project-slide img {
-      width: 100%;
+      max-width: 100%;
       border-radius: 8px;
       margin-bottom: 1rem;
     }
+
     .tags {
       margin-top: 0.5rem;
       font-size: 0.8rem;
       color: #ff6ec7;
     }
-    .project-slide h3 {
-      margin: 0 0 0.5rem;
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      color: #00c2ff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 2;
     }
-    .project-slide p {
-      margin: 0;
+
+    .carousel-nav.left {
+      left: 10px;
+    }
+
+    .carousel-nav.right {
+      right: 10px;
     }
   </style>
 </head>
@@ -66,12 +89,18 @@
 
   <main>
     <h2 style="text-align:center; margin-top:1rem;">Proyectos</h2>
+
     <div class="filter-buttons">
       <button onclick="filterProjects('all')">Todos</button>
       <button onclick="filterProjects('Personal')">Personales</button>
       <button onclick="filterProjects('Profesional')">Profesionales</button>
     </div>
-    <div class="carousel" id="carousel"></div>
+
+    <div class="carousel-wrapper">
+      <button class="carousel-nav left" onclick="prevSlide()">‹</button>
+      <div class="carousel" id="carousel"></div>
+      <button class="carousel-nav right" onclick="nextSlide()">›</button>
+    </div>
   </main>
 
   <footer>
@@ -81,12 +110,15 @@
   <script>
     const carousel = document.getElementById("carousel");
     let allProjects = [];
+    let currentIndex = 0;
+    let filtered = [];
 
     fetch("proyectos.json")
       .then(res => res.json())
       .then(data => {
         allProjects = data;
-        renderProjects(allProjects);
+        filtered = [...allProjects];
+        renderProjects(filtered);
       });
 
     function renderProjects(projects) {
@@ -95,23 +127,43 @@
         const div = document.createElement("div");
         div.className = "project-slide";
         div.dataset.tags = p.tag;
-        div.innerHTML = `
+        div.innerHTML = \`
           <img src="\${p.image}" alt="\${p.title}">
           <h3>\${p.title}</h3>
           <p>\${p.description}</p>
           <div class="tags">#\${p.tag}</div>
-        `;
+        \`;
         carousel.appendChild(div);
       });
+      updateCarousel();
     }
 
     function filterProjects(tag) {
       if (tag === "all") {
-        renderProjects(allProjects);
+        filtered = [...allProjects];
       } else {
-        renderProjects(allProjects.filter(p => p.tag === tag));
+        filtered = allProjects.filter(p => p.tag === tag);
       }
+      currentIndex = 0;
+      renderProjects(filtered);
     }
+
+    function updateCarousel() {
+      const width = carousel.offsetWidth;
+      carousel.style.transform = \`translateX(-\${currentIndex * width}px)\`;
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % filtered.length;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + filtered.length) % filtered.length;
+      updateCarousel();
+    }
+
+    window.addEventListener("resize", updateCarousel);
   </script>
 </body>
 </html>
