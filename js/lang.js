@@ -171,3 +171,14 @@ if(langSelect){
     toggleLangBlocks(e.target.value);
   }, {once:false});
 }
+
+
+const overlay = document.getElementById('overlay');
+function toggleMenu(){
+  document.querySelector('.nav-links').classList.toggle('open');
+  overlay && overlay.classList.toggle('show');
+}
+if(burgerBtn){
+  burgerBtn.addEventListener('click', toggleMenu);
+}
+overlay && overlay.addEventListener('click', toggleMenu);
