@@ -166,6 +166,9 @@ function toggleLangBlocks(lang){
   });
 }
 toggleLangBlocks(storedLang);
+
+document.body.classList.add('lang-ready');
+
 if(langSelect){
   langSelect.addEventListener('change', e=>{
     toggleLangBlocks(e.target.value);
