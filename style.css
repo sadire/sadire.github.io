@@ -185,3 +185,45 @@ body {
     transform: translateY(0);
   }
 }
+
+/* Estilo aclarado */
+body {
+  background: #1a1a1a;
+  color: #f0f0f0;
+}
+header {
+  background: #1a1a1a;
+  color: #f0f0f0;
+}
+nav {
+  background-color: #1a1a1a;
+  border-bottom: 2px solid #00c2ff;
+}
+nav a {
+  color: #f0f0f0;
+}
+nav a:hover {
+  color: #00c2ff;
+}
+button {
+  background-color: #00c2ff;
+  color: #1a1a1a;
+}
+footer {
+  background: #1a1a1a;
+  color: #ff6ec7;
+}
+.project-card {
+  background: #292929;
+  color: #f0f0f0;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+}
+.project-card:hover {
+  border: 1px solid #00c2ff;
+}
+#project-details {
+  border-top: 2px dashed #ff6ec7;
+}
+.details-content .media img {
+  border: 2px solid #00c2ff;
+}
