@@ -14,25 +14,19 @@ function renderProjects(projects) {
     div.className = "project-slide";
     div.dataset.tags = p.tag;
 
-    // Ruta simulada (solo para primeros 2 proyectos)
-    let linkStart = "";
-    let linkEnd = "";
-    if (i === 0) {
-      linkStart = '<a href="clasified.html">';
-      linkEnd = '</a>';
-    } else if (i === 1) {
-      linkStart = '<a href="proyecto_base.html">';
-      linkEnd = '</a>';
+    let content = `
+      <img src="${p.image}" alt="${p.title}">
+      <h3>${p.title}</h3>
+      <p>${p.description}</p>
+      <div class="tags">#${p.tag}</div>
+    `;
+
+    if (p.link) {
+      div.innerHTML = `<a href="${p.link}">${content}</a>`;
+    } else {
+      div.innerHTML = content;
     }
 
-    div.innerHTML = \`
-      \${linkStart}
-      <img src="\${p.image}" alt="\${p.title}">
-      <h3>\${p.title}</h3>
-      <p>\${p.description}</p>
-      <div class="tags">#\${p.tag}</div>
-      \${linkEnd}
-    \`;
     carousel.appendChild(div);
   });
   updateCarousel();
