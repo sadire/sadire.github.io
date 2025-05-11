@@ -1,6 +1,6 @@
-# Web Personal de Samuel Díaz
+# Porfolio 
 
-Este es un sitio web estático hecho en HTML, CSS y JavaScript, diseñado como portafolio personal.
+Este es un sitio web estático hecho en HTML, CSS y JavaScript, diseñado como portafolio personal. Sufrido entre yo y chatgpeté porque soy diseñador, no web developer
 
 ## Secciones
 - Sobre mí

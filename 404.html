@@ -3,39 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>404 - Página no encontrada</title>
+  <title>404 - It's dangerous to go alone</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    .error-container {
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Press Start 2P', monospace;
       text-align: center;
-      padding: 4rem 2rem;
+      padding: 3rem 1rem;
     }
-    .error-container img {
-      max-width: 150px;
-      margin-top: 1rem;
+
+    h1 {
+      color: red;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .nes-container {
+      display: inline-block;
+      margin-top: 2rem;
+    }
+
+    .nes-container img {
+      width: 64px;
+      height: 64px;
+      image-rendering: pixelated;
       cursor: pointer;
-      transition: transform 0.2s;
     }
-    .error-container img:hover {
+
+    .nes-container:hover img {
       transform: scale(1.1);
+      transition: transform 0.2s;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>404</h1>
-    <p>Página no encontrada</p>
-  </header>
-
-  <main class="error-container">
-    <h2>It’s dangerous to go alone! Take this.</h2>
-    <a href="proyectos.html">
-      <img src="assets/sword.png" alt="Espada legendaria">
+  <h1>404</h1>
+  <h2>IT'S DANGEROUS TO GO ALONE!<br>TAKE THIS.</h2>
+  <div class="nes-container">
+    <a href="proyectos.html" title="Ir a proyectos">
+      <img src="assets/sword.png" alt="Sword">
     </a>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Aimadack</p>
-  </footer>
+  </div>
 </body>
 </html>
