@@ -106,3 +106,54 @@ document.querySelectorAll('.nav-links a').forEach(link=>{
     }
   });
 })();
+// Active nav underline
+function setActiveLink(){
+  const links = document.querySelectorAll('.nav-links a');
+  links.forEach(l=>l.classList.remove('active'));
+  const path = window.location.pathname.replace(/\/index\.html$/, '').replace(/\/$/, '');
+  const hash = window.location.hash;
+
+  let key = '';
+  if(path === '' || path === '/'){
+     key = (hash === '#projects') ? '#projects' : '#about';
+  }else if(path.endsWith('/unannounced.html')){
+     key = 'unannounced.html';
+  }else if(path.endsWith('/resume.html')){
+     key = 'resume.html';
+  }else if(path.includes('/projects/')){
+     key = 'projects';
+  }
+
+  links.forEach(link=>{
+    const href = link.getAttribute('href');
+    if((hash && href.endsWith(hash) && key.startsWith('#')) ||
+       (!hash && key.startsWith('#') && href.endsWith('#about')) ||
+       (href.endsWith(key))){
+       link.classList.add('active');
+    }
+  });
+}
+
+setActiveLink();
+window.addEventListener('hashchange', setActiveLink);
+
+// Smooth scroll nav
+document.querySelectorAll('.nav-links a[href^="#"]').forEach(link=>{
+  link.addEventListener('click', e=>{
+    e.preventDefault();
+    const id = link.getAttribute('href');
+    const target = document.querySelector(id);
+    if(target){
+      target.scrollIntoView({behavior:'smooth', block:'center'});
+      history.pushState(null,'',id);
+      setActiveLink();
+    }
+  });
+});
+
+window.addEventListener('load', ()=>{
+  if(location.hash && document.querySelector(location.hash)){
+    document.querySelector(location.hash).scrollIntoView({behavior:'instant', block:'center'});
+  }
+});
+// End smooth scroll
