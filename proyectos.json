@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Clasified",
+    "description": "Aventura narrativa ambientada en un mundo retro-futurista.",
+    "image": "assets/proyecto1.png",
+    "tag": "Personal"
+  },
+  {
+    "title": "Simulador Botánico",
+    "description": "IA emocional y plantas que reaccionan a tu entorno físico.",
+    "image": "assets/proyecto2.png",
+    "tag": "Profesional"
+  },
+  {
+    "title": "Juego VR Experimental",
+    "description": "Explora mundos con las manos. Sin mandos, pura inmersión.",
+    "image": "assets/proyecto3.png",
+    "tag": "Profesional"
+  },
+  {
+    "title": "Mente Modular",
+    "description": "Un puzzle psicológico que reconstruye tu forma de pensar.",
+    "image": "assets/proyecto4.png",
+    "tag": "Personal"
+  },
+  {
+    "title": "City Architect",
+    "description": "Aplicación profesional para planificar espacios urbanos.",
+    "image": "assets/proyecto5.png",
+    "tag": "Profesional"
+  },
+  {
+    "title": "Bitstream Ballad",
+    "description": "Juego rítmico donde hackeas sistemas con música.",
+    "image": "assets/proyecto6.png",
+    "tag": "Personal"
+  },
+  {
+    "title": "Data Garden",
+    "description": "Dashboard vivo para cultivos urbanos con sensores en tiempo real.",
+    "image": "assets/proyecto7.png",
+    "tag": "Profesional"
+  }
+]

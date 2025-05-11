@@ -6,62 +6,57 @@
   <title>Proyectos - Aimadack</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem 0;
+    .filter-buttons {
+      text-align: center;
+      margin-top: 1rem;
     }
-    .project-card {
-      background: white;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
+
+    .filter-buttons button {
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #00c2ff;
+      color: #1a1a1a;
       cursor: pointer;
-    }
-    .project-card:hover {
-      transform: translateY(-4px);
-    }
-    .project-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .project-card .content {
-      padding: 1rem;
+      font-weight: bold;
     }
 
-    #project-details {
-      display: none;
-      padding: 2rem 0;
-      border-top: 2px dashed #ccc;
-      margin-top: 2rem;
-    }
-
-    .details-content {
+    .carousel {
       display: flex;
-      flex-wrap: wrap;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
       gap: 2rem;
-      align-items: flex-start;
+      padding: 2rem;
+      scroll-behavior: smooth;
     }
 
-    .details-content .media {
-      flex: 1 1 40%;
+    .project-slide {
+      flex: 0 0 80%;
+      background: #292929;
+      border-radius: 8px;
+      padding: 1rem;
+      scroll-snap-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
-    .details-content .media img {
+    .project-slide img {
       width: 100%;
       border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 1rem;
     }
 
-    .details-content .text {
-      flex: 1 1 55%;
+    .tags {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: #ff6ec7;
     }
 
-    .details-content h3 {
-      margin-top: 0;
+    .project-slide h3 {
+      margin: 0 0 0.5rem;
+    }
+
+    .project-slide p {
+      margin: 0;
     }
   </style>
 </head>
@@ -77,80 +72,52 @@
   </nav>
 
   <main>
-    <section>
-      <h2>Proyectos</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <img src="assets/proyecto1.png" alt="Proyecto 1" />
-          <div class="content">
-            <h3>Clasified</h3>
-            <p>Proyecto actual centrado en narrativa y exploración.</p>
-          </div>
-        </div>
-        <div class="project-card">
-          <img src="assets/proyecto2.png" alt="Proyecto 2" />
-          <div class="content">
-            <h3>Simulador Botánico</h3>
-            <p>Plantas que responden a tus decisiones.</p>
-          </div>
-        </div>
-        <div class="project-card">
-          <img src="assets/proyecto3.png" alt="Proyecto 3" />
-          <div class="content">
-            <h3>Juego VR Experimental</h3>
-            <p>Explora mundos con solo tus manos.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <h2 style="text-align:center; margin-top:1rem;">Proyectos</h2>
 
-    <section id="project-details"></section>
+    <div class="filter-buttons">
+      <button onclick="filterProjects('all')">Todos</button>
+      <button onclick="filterProjects('Personal')">Personales</button>
+      <button onclick="filterProjects('Profesional')">Profesionales</button>
+    </div>
+
+    <div class="carousel" id="carousel">
+      <div class="project-slide" data-tags="Personal">
+        <img src="assets/proyecto1.png" alt="Clasified">
+        <h3>Clasified</h3>
+        <p>Aventura narrativa ambientada en un mundo retro-futurista.</p>
+        <div class="tags">#Personal</div>
+      </div>
+      <div class="project-slide" data-tags="Profesional">
+        <img src="assets/proyecto2.png" alt="Simulador Botánico">
+        <h3>Simulador Botánico</h3>
+        <p>IA emocional y plantas que reaccionan a tu entorno físico.</p>
+        <div class="tags">#Profesional</div>
+      </div>
+      <div class="project-slide" data-tags="Profesional">
+        <img src="assets/proyecto3.png" alt="Juego VR">
+        <h3>Juego VR Experimental</h3>
+        <p>Explora mundos con las manos. Sin mandos, pura inmersión.</p>
+        <div class="tags">#Profesional</div>
+      </div>
+    </div>
   </main>
 
   <footer>
     <p>&copy; 2025 Aimadack</p>
   </footer>
-  <script>document.addEventListener("DOMContentLoaded", () => {
-  const detailsSection = document.getElementById("project-details");
-  const cards = document.querySelectorAll(".project-card");
 
-  const projects = {
-    clasified: {
-      title: "Clasified",
-      desc: "Un juego de exploración narrativa con estética retro-futurista. En un mundo donde los recuerdos se imprimen en vinilo, deberás descubrir qué es real.",
-      img: "assets/proyecto1.png"
-    },
-    botanico: {
-      title: "Simulador Botánico",
-      desc: "Simulación interactiva de cultivos con IA emocional. ¿Las plantas sienten? Esta responde con colores, crecimiento y patrones únicos.",
-      img: "assets/proyecto2.png"
-    },
-    vr: {
-      title: "Juego VR Experimental",
-      desc: "Control total sin mandos: usa tus manos para explorar mundos extraños donde la gravedad es un rumor y los gatos dominan la física cuántica.",
-      img: "assets/proyecto3.png"
+  <script>
+    function filterProjects(tag) {
+      const slides = document.querySelectorAll(".project-slide");
+      slides.forEach(slide => {
+        const tags = slide.dataset.tags;
+        if (tag === "all" || tags.includes(tag)) {
+          slide.style.display = "block";
+        } else {
+          slide.style.display = "none";
+        }
+      });
     }
-  };
-
-  cards.forEach((card, index) => {
-    card.addEventListener("click", () => {
-      const key = Object.keys(projects)[index];
-      const project = projects[key];
-      detailsSection.innerHTML = `
-        <div class="details-content">
-          <div class="media">
-            <img src="${project.img}" alt="${project.title}" />
-          </div>
-          <div class="text">
-            <h3>${project.title}</h3>
-            <p>${project.desc}</p>
-          </div>
-        </div>
-      `;
-      detailsSection.style.display = "block";
-      detailsSection.scrollIntoView({ behavior: "smooth" });
-    });
-  });
-});</script>
+  </script>
 </body>
 </html>
