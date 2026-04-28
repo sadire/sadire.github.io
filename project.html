@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project — Portfolio</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="project">
+
+  <nav>
+    <a class="nav-logo" href="index.html">Name</a>
+    <div class="nav-links">
+      <a href="index.html">Projects</a>
+      <a href="about.html">About</a>
+      <a href="resume.html">Resume</a>
+    </div>
+    <button class="lang-toggle" onclick="toggleLang()">ES</button>
+  </nav>
+
+  <main>
+    <div class="project-hero">
+      <a class="back-link" href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        <span>Projects</span>
+      </a>
+      <h1 id="project-title">Loading…</h1>
+    </div>
+
+    <div class="project-main">
+
+      <!-- 1. Video/Image + details -->
+      <div class="project-media-data">
+        <div class="project-media" id="project-media">
+          <div class="media-placeholder">Loading…</div>
+        </div>
+        <div class="project-data" id="project-data"></div>
+      </div>
+
+      <!-- 2. Short intro paragraph -->
+      <div class="project-intro" id="project-intro"></div>
+
+      <!-- 3. Text left + image right -->
+      <div class="project-detail" id="project-detail"></div>
+
+      <!-- 4. Gallery (up to 3 images) -->
+      <div class="project-gallery" id="project-gallery"></div>
+
+    </div>
+
+    <div class="more-projects">
+      <h2 id="more-label">More projects</h2>
+      <div class="more-grid" id="more-grid"></div>
+    </div>
+  </main>
+
+  <footer><p></p></footer>
+
+  <script src="data/content.js"></script>
+  <script src="data/projects.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/projects.js"></script>
+</body>
+</html>

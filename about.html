@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio</title>
+  <title>About — Portfolio</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body data-page="index">
+<body data-page="about">
 
   <nav>
     <a class="nav-logo" href="index.html">Name</a>
@@ -18,13 +18,26 @@
     <button class="lang-toggle" onclick="toggleLang()">ES</button>
   </nav>
 
-  <header class="page-header">
-    <h1>Work</h1>
-  </header>
-
   <main>
-    <div id="projects-grid" class="projects-grid">
-      <div class="loading">Loading…</div>
+    <div class="about-layout">
+      <div class="about-photo" id="about-photo">
+        <div class="photo-placeholder">Photo</div>
+      </div>
+
+      <div class="about-content">
+        <h1 id="about-title">About</h1>
+        <div id="about-bio"></div>
+
+        <div class="skills-section">
+          <p class="skills-label">Skills</p>
+          <div class="skills-list" id="about-skills"></div>
+        </div>
+
+        <div class="contact-section">
+          <p class="skills-label">Contact</p>
+          <div class="contact-links" id="about-contact"></div>
+        </div>
+      </div>
     </div>
   </main>
 

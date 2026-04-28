@@ -1,76 +1,40 @@
-
 <!DOCTYPE html>
-
-<html lang="es">
+<html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Resume - Samuel Díaz</title>
-<link href="css/style.css" rel="stylesheet"/>
-<link href="favicon.ico" rel="icon" type="image/x-icon"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume — Portfolio</title>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body><nav><div class="logo">Samuel Díaz <span class="subtitle">Game Developer</span></div><button aria-label="Menu" class="burger" id="burger">☰</button><ul class="nav-links"><a data-i18n="about" href="./index.html#about">Sobre mí</a><a data-i18n="projects" href="./index.html#projects">Proyectos</a><a data-i18n="unannounced" href="./unannounced.html">Sin anunciar</a><a data-i18n="resume" href="../resume.html">Currículum</a></ul><select id="lang-select"><option value="es">🇪🇸 ES</option><option value="en">🇬🇧 EN</option></select></nav><div class="menu-overlay" id="overlay"></div>
+<body data-page="resume">
 
-
-<main class="resume-container">
-  <h1 data-i18n="cv_name">SAMUEL DÍAZ – Technical Game Designer</h1>
-
-  <section>
-    <h2 data-i18n="cv_summary_title">EXTRACTO</h2>
-    <p data-i18n="cv_summary_body">Technical Game Designer con más de 4 años uniendo visión de diseño e implementación técnica.</p>
-  </section>
-
-  <section>
-    <h2 data-i18n="cv_experience_title">EXPERIENCIA</h2>
-    <div class="entry">
-      <h3 data-i18n="cv_exp1_title">Game Designer y Producer · Casual Brothers Ltd · feb 2025–Presente</h3>
-      <p data-i18n="cv_exp1_body">Dirijo la visión de diseño…</p>
+  <nav>
+    <a class="nav-logo" href="index.html">Name</a>
+    <div class="nav-links">
+      <a href="index.html">Projects</a>
+      <a href="about.html">About</a>
+      <a href="resume.html">Resume</a>
     </div>
-    <div class="entry">
-      <h3 data-i18n="cv_exp2_title">Desarrollador de videojuegos · Sala Scala · nov 2024–feb 2025</h3>
-      <p data-i18n="cv_exp2_body">Implementé mecánicas VR…</p>
+    <button class="lang-toggle" onclick="toggleLang()">ES</button>
+  </nav>
+
+  <main>
+    <div class="resume-page">
+      <div class="resume-header">
+        <h1 id="resume-title">Resume</h1>
+        <a id="download-btn" class="download-btn" href="resume.pdf" download>
+          Download PDF
+        </a>
+      </div>
+      <div id="resume-sections"></div>
     </div>
-    <div class="entry">
-      <h3 data-i18n="cv_exp3_title">Technical Designer / QA · No Brakes Games · may 2021–nov 2024</h3>
-      <p data-i18n="cv_exp3_body">Prototipé sistemas de físicas…</p>
-    </div>
-  </section>
+  </main>
 
-  <section>
-    <h2 data-i18n="cv_education_title">FORMACIÓN</h2>
-    <p data-i18n="cv_edu1">Doble Máster en Diseño…</p>
-    <p data-i18n="cv_edu2">Grado en Conservación…</p>
-  </section>
+  <footer><p></p></footer>
 
-  <section>
-    <h2 data-i18n="cv_skills_title">APTITUDES</h2>
-    <p data-i18n="cv_skills_body">Game Design • Prototipado…</p>
-  </section>
-
-  <section>
-    <h2 data-i18n="cv_languages_title">IDIOMAS</h2>
-    <p data-i18n="cv_languages_body">Español…</p>
-  </section>
-
-  <section>
-    <h2 data-i18n="cv_volunteer_title">VOLUNTARIADO</h2>
-    <p data-i18n="cv_volunteer_body">Vicepresidente – Asociación Canaria…</p>
-  </section>
-
-  <section>
-    <h2 data-i18n="cv_contact_title">CONTACTO</h2>
-    <p data-i18n="cv_contact_body">Las Palmas de Gran Canaria…</p>
-  </section>
-
-  
-</main>
-
-
-    <a class="download-btn" data-i18n="resume_download_pdf" download href="cv/Samuel_Diaz_CV.pdf">Descargar PDF</a>
-<footer>
-<div>© 2025 Samuel Díaz · <a href="mailto:samuel@example.com">samuel@example.com</a></div>
-</footer>
-<script src="js/translations.js"></script>
-<script src="js/lang.js"></script>
+  <script src="data/content.js"></script>
+  <script src="data/projects.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/projects.js"></script>
 </body>
 </html>
