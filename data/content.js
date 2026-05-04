@@ -6,7 +6,8 @@
 window.PORTFOLIO_CONTENT = {
 
   "site": {
-    "name": "Your Name"
+    "name": "Samuel Díaz Reyes",
+    "tagline": { "en": "Game Designer", "es": "Game Designer" }
   },
 
   "nav": {
@@ -16,12 +17,14 @@ window.PORTFOLIO_CONTENT = {
   },
 
   "home": {
-    "title": { "en": "Work", "es": "Trabajo" }
+    "title": { "en": "Work", "es": "Trabajo" },
+    "intro": { "en": "", "es": "" }
   },
 
   "categories": {
-    "professional": { "en": "Professional",         "es": "Profesional"             },
-    "independent":  { "en": "Independent Projects", "es": "Proyectos independientes" }
+    "professional": { "en": "Professional",             "es": "Profesional"             },
+    "independent":  { "en": "Independent Projects",     "es": "Proyectos independientes" },
+    "gamejams":     { "en": "Game Jams & Student Work", "es": "Game Jams y proyectos académicos" }
   },
 
   "about": {
@@ -82,7 +85,7 @@ window.PORTFOLIO_CONTENT = {
   },
 
   "footer": {
-    "text": { "en": "© 2024 Your Name", "es": "© 2024 Tu Nombre" }
+    "text": { "en": "© 2025 Samuel Díaz Reyes", "es": "© 2025 Samuel Díaz Reyes" }
   }
 
 };

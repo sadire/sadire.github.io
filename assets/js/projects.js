@@ -30,8 +30,10 @@ function imgOrPlaceholder(src, alt, className) {
 /* ── Index page — projects grid ──────────────────────── */
 
 function renderCard(p) {
+  const href   = p.external ? p.external : `project.html?id=${p.id}`;
+  const target = p.external ? ' target="_blank" rel="noopener"' : '';
   return `
-    <a class="project-card" href="project.html?id=${p.id}">
+    <a class="project-card" href="${href}"${target}>
       ${imgOrPlaceholder(p.thumbnail, t(p.title), 'thumb-placeholder')}
       <div class="overlay">
         <h3>${t(p.title)}</h3>
@@ -49,6 +51,12 @@ function renderProjectsGrid() {
 
   const titleEl = document.querySelector('.page-header h1');
   if (titleEl) titleEl.textContent = t(SITE.content.home.title);
+
+  const introEl = document.querySelector('.page-header .home-intro');
+  if (introEl) {
+    const text = t(SITE.content.home.intro);
+    introEl.textContent = text || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+  }
 
   const grid = document.getElementById('projects-grid');
   if (!grid) return;
@@ -88,7 +96,8 @@ function renderProjectPage() {
   const id      = getProjectId();
   const project = SITE.projects.find(p => p.id === id);
 
-  if (!project || project.hidden) {
+  if (!project || project.hidden || project.external) {
+    if (project && project.external) { window.location.replace(project.external); return; }
     window.location.replace('index.html');
     return;
   }
@@ -168,7 +177,7 @@ function renderProjectPage() {
   }
 
   /* More projects */
-  const others = SITE.projects.filter(p => p.id !== id).slice(0, 3);
+  const others = SITE.projects.filter(p => p.id !== id && !p.hidden).slice(0, 3);
   const moreLabel = document.getElementById('more-label');
   if (moreLabel) {
     moreLabel.textContent = SITE.lang === 'es' ? 'Más proyectos' : 'More projects';

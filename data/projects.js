@@ -57,10 +57,17 @@ window.PORTFOLIO_PROJECTS = [
     ],
 
     "intro": {
-      "en": "Your description here.",
-      "es": "Tu descripción aquí."
+      "en": "On Bluey I split my time between production and design. First task was the remaster of the original — a lot of bugfixing, stabilising things, getting the game to where it should have been. After that, three free updates.",
+      "es": "En Bluey combiné producción y diseño. Lo primero fue el remaster del original — mucho bugfixing, estabilizar cosas, dejar el juego donde tenía que estar. Después de eso, tres actualizaciones gratuitas."
     },
-    "detail": null,
+    "detail": {
+      "text": {
+        "en": "The updates weren't just polish. New minigames, reworked systems, UX improvements, new content. Each one meant deciding what was actually worth shipping — there's always more on the list than time to do it.",
+        "es": "Las updates no eran solo pulido. Minijuegos nuevos, sistemas revisados, mejoras de UX, contenido nuevo. En cada una había que decidir qué valía la pena sacar — siempre hay más en la lista que tiempo para hacerlo."
+      },
+      "image": "assets/images/projects/bluey-videogame/hero.jpg",
+      "imageAlt": "Bluey: The Videogame"
+    },
     "gallery": []
   },
 
@@ -112,14 +119,14 @@ window.PORTFOLIO_PROJECTS = [
     ],
 
     "intro": {
-      "en": "My role on Human: Fall Flat 2 sat right at the crossroads between design and programming. Day to day that meant prototyping mechanics, getting them working inside actual levels, and bringing back to the team what was and wasn't feasible.",
-      "es": "Mi rol en Human: Fall Flat 2 estuvo justo en el cruce entre diseño y programación. En el día a día eso significaba prototipar mecánicas, integrarlas en niveles reales y trasladar al equipo qué era viable y qué no."
+      "en": "My role was somewhere between design and programming — prototyping mechanics, getting them into actual levels, and telling the team what held up and what didn't.",
+      "es": "Mi rol estaba en algún punto entre diseño y programación — prototipar mecánicas, meterlas en niveles reales y contarle al equipo qué aguantaba y qué no."
     },
 
     "detail": {
       "text": {
-        "en": "I was part of the level design process too — not just implementing other people's ideas but shaping them from early on alongside the designers.\n\nOn the QA side I was responsible for tracking bugs and making sure the product held together across builds. On the technical side I wrote feature proposals to hand off to programming and fed initial concepts into the design pipeline — helping ideas go from a rough sketch to something the team could actually evaluate.",
-        "es": "También participé en el proceso de diseño de niveles — no solo implementando ideas ajenas, sino dándoles forma desde las primeras etapas junto a los diseñadores.\n\nComo QA me encargué de rastrear bugs y asegurar que el producto se mantuviera estable entre builds. En la parte técnica redacté propuestas de features para enviar a programación e introduje conceptos iniciales en el pipeline de diseño — ayudando a que las ideas pasaran de boceto a algo que el equipo pudiera evaluar de verdad."
+        "en": "I was in the level design process too, not just implementing — helping shape things early on alongside the designers.\n\nOn QA I tracked bugs and kept the build stable. On the technical side I wrote feature proposals for programming and pushed early concepts into the pipeline. Getting an idea from a rough description to something the team could actually look at and react to.",
+        "es": "También estuve en el proceso de diseño de niveles, no solo implementando — ayudando a darles forma desde el principio junto a los diseñadores.\n\nEn QA rastreé bugs y mantuve el build estable. En la parte técnica escribí propuestas de features para programación y metí conceptos iniciales en el pipeline. Llevar una idea de una descripción vaga a algo que el equipo pudiera ver y evaluar."
       },
       "image": "assets/images/projects/fall-flat-2/hero.jpg",
       "imageAlt": "Human: Fall Flat 2"
@@ -146,11 +153,29 @@ window.PORTFOLIO_PROJECTS = [
     ],
 
     "intro": {
-      "en": "Your description here.",
-      "es": "Tu descripción aquí."
+      "en": "On Fire! is mine. Procedural infinite runner, designed and programmed by me. Started by figuring out what the game actually felt like to play, then built everything around that.",
+      "es": "On Fire! es mío. Infinite runner procedural, diseñado y programado por mí. Empecé definiendo cómo se siente jugarlo y fui construyendo todo a partir de ahí."
     },
-    "detail": null,
+    "detail": {
+      "text": {
+        "en": "Once the design was solid I needed tools — level generation that let me test ideas fast without going back into the code every time. The game generates content on the fly but it had to feel like it was put there on purpose.",
+        "es": "Con el diseño claro necesitaba herramientas — generación de niveles que me dejara probar ideas rápido sin volver al código cada vez. El juego genera contenido en tiempo real pero tenía que parecer que alguien lo había puesto ahí a propósito."
+      },
+      "image": "assets/images/projects/on-fire/hero.jpg",
+      "imageAlt": "On Fire!"
+    },
     "gallery": []
+  },
+
+  {
+    "id": "itch-gamejams",
+    "category": "independent",
+    "external": "https://klapa.itch.io/",
+
+    "title":   { "en": "Game Jams & Student Projects", "es": "Game Jams y proyectos académicos" },
+    "tagline": { "en": "View on itch.io", "es": "Ver en itch.io" },
+    "tags":    [],
+    "thumbnail": ""
   }
 
 ];

@@ -87,6 +87,13 @@ nav {
   letter-spacing: -0.04em;
   line-height: 1.05;
 }
+.home-intro {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 52ch;
+  line-height: 1.6;
+}
 
 /* === Projects grid ===================================== */
 .projects-grid {
