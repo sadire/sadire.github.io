@@ -36,7 +36,7 @@ Flujo de arranque:
 3. Llama a `renderPage()` (en `projects.js`)
 4. `renderPage()` detecta `data-page` en `<body>` y despacha al render correspondiente
 
-**Cache busting**: todos los `<script src="...">` llevan `?v=N`. Cuando se modifique un script y el usuario tenga caché stale, hay que incrementar N en todos los HTML. Versión actual: `?v=4`.
+**Cache busting**: todos los `<script src="...">` llevan `?v=N`. Cuando se modifique un script y el usuario tenga caché stale, hay que incrementar N en todos los HTML. Versión actual: `?v=5`.
 
 ---
 
@@ -146,8 +146,11 @@ assets/images/about/photo.jpg           → foto de perfil
 
 ## Pendiente
 
-- Añadir imágenes reales (thumb + hero) a todos los proyectos
-- Rellenar `data/content.js` con bio, skills, contacto real y secciones del CV
-- Reemplazar `resume.pdf` con el PDF real
-- Rellenar `home.intro` con texto real (ahora vacío → muestra lorem ipsum)
-- Completar la página About con foto y datos reales
+- Añadir imágenes reales (thumb + hero) a los proyectos que faltan (`unannounced`, `on-fire`, `itch-gamejams`)
+- Añadir la foto de perfil en `assets/images/about/photo.jpg` (About muestra placeholder mientras tanto)
+- Valorar reemplazar `resume.pdf` (actual: export de LinkedIn) por un PDF con mejor diseño
+- Las fechas del CV (`date`) son strings sin localizar — se muestran en inglés también en ES
+
+## Hecho (ago 2026)
+
+- `data/content.js` rellenado con contenido real: bio, skills, contacto (email, LinkedIn, GitHub), `home.intro` y todas las secciones del CV (experiencia, formación, aptitudes, idiomas, voluntariado), migrado del antiguo `js/translations.js`
