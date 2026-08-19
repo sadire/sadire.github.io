@@ -94,7 +94,7 @@ Campos fijos:
 |---|---|---|---|
 | `unannounced` | Unannounced Project | professional | placeholder, sin imágenes |
 | `bluey-videogame` | Bluey: The Videogame | professional | texto real, sin imágenes |
-| `grinch-2` | Grinch 2 | professional | `hidden: true`, placeholder |
+| `grinch-2` | Grinch 2 | professional | visible, texto placeholder, sin imágenes |
 | `fall-flat-2` | Human: Fall Flat 2 | professional | texto real, hero=YouTube embed |
 | `on-fire` | On Fire! | independent | texto real, sin imágenes |
 | `itch-gamejams` | Game Jams & Student Projects | independent | external → klapa.itch.io |
@@ -140,7 +140,7 @@ assets/images/about/photo.jpg           → foto de perfil
 - **El `id` es el slug de la URL** — cambiarlo rompe links existentes
 - **Si se modifica un `.js` de assets**, incrementar `?v=N` en todos los HTML para invalidar caché
 - **Textos de proyectos**: el usuario quiere estilo orgánico y natural. Nada de frases de IA ("from the ground up", "meaningful experiences", "I leveraged X to achieve Y"). Frases cortas, directas, en primera persona, como hablaría alguien real.
-- **`grinch-2` está oculto** (`hidden: true`) — es un proyecto real pero con NDA, no debe mostrarse
+- **`grinch-2` ya es público** (el usuario lo desveló en ago 2026) — pero su texto sigue siendo placeholder
 
 ---
 

@@ -74,7 +74,6 @@ window.PORTFOLIO_PROJECTS = [
   {
     "id": "grinch-2",
     "category": "professional",
-    "hidden": true,
 
     "title":   { "en": "Grinch 2", "es": "Grinch 2" },
     "tagline": { "en": "Level Design", "es": "Diseño de niveles" },
