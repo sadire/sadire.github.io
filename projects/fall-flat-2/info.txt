@@ -4,7 +4,7 @@ tagline.es: Diseñador técnico y QA
 category: professional
 tags: Technical Design, QA, Physics
 hero: https://www.youtube.com/watch?v=Iw118oOrKzQ
-detail-image: hero.jpg
+detail-image: none
 
 data: Role / Rol | Technical Designer & QA
 data: Developer / Desarrollador | No Brakes Games
