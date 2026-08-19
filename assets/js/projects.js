@@ -134,18 +134,21 @@ function renderProjectPage() {
     `).join('')
   }</dl>${introHtml}`;
 
-  /* 3. Text left + image right */
+  /* 3. Text left + image right (detail-image: none -> solo texto) */
   const detailEl = document.getElementById('project-detail');
   if (detailEl && project.detail) {
-    const imgHtml = project.detail.image
-      ? `<img src="${project.detail.image}" alt="${project.detail.imageAlt || ''}"
-             onerror="_imgErr(this,'','detail-placeholder')">`
-      : `<div class="media-placeholder">${_camIcon}</div>`;
-    detailEl.innerHTML = `
+    const textHtml = `
       <div class="detail-text">
         ${t(project.detail.text).split('\n\n').map(p => `<p>${p.trim()}</p>`).join('')}
-      </div>
-      <div class="detail-image">${imgHtml}</div>`;
+      </div>`;
+    detailEl.classList.toggle('text-only', !project.detail.image);
+    detailEl.innerHTML = project.detail.image
+      ? `${textHtml}
+         <div class="detail-image">
+           <img src="${project.detail.image}" alt="${project.detail.imageAlt || ''}"
+                onerror="_imgErr(this,'','detail-placeholder')">
+         </div>`
+      : textHtml;
   }
 
   /* 4. Gallery (up to 3 images) */

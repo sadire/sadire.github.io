@@ -124,7 +124,7 @@ function parseProjectTxt(id, raw) {
     intro: text('intro'),
     detail: detailText ? {
       text: detailText,
-      image: dir + (meta['detail-image'] || 'detail.jpg'),
+      image: meta['detail-image'] === 'none' ? '' : dir + (meta['detail-image'] || 'detail.jpg'),
       imageAlt: title.en
     } : null,
     gallery: meta['gallery']

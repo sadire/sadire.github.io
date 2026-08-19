@@ -4,8 +4,8 @@ tagline.es: Diseño y programación
 category: independent
 tags: Game Design, Programming
 hero: https://www.youtube.com/watch?v=ge73QVRGVBY
-thumb: thumb.png
-detail-image: cover.png
+thumb: gallery-1.png
+detail-image: none
 gallery: gallery-1.png, gallery-2.png, gallery-3.png
 
 data: Role / Rol | Designer & Programmer

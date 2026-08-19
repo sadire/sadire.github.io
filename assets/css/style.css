@@ -309,7 +309,11 @@ nav {
 }
 
 .project-data { padding-top: 0.5rem; }
-.project-data dl { display: grid; row-gap: 1.4rem; }
+.project-data dl {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* ficha compacta: equilibra con el vídeo */
+  gap: 1.4rem 1.5rem;
+}
 .data-intro {
   margin-top: 1.75rem;
   padding-top: 1.5rem;
@@ -394,6 +398,9 @@ nav {
   margin-bottom: 3.5rem;
 }
 .detail-image img { margin-top: 0.35rem; } /* alinea con la primera línea del texto */
+/* Detail sin imagen: solo texto */
+.project-detail.text-only { display: block; }
+.project-detail.text-only .detail-text p { max-width: 66ch; }
 @media (max-width: 760px) {
   .project-detail { grid-template-columns: 1fr; gap: 2rem; }
 }
