@@ -263,15 +263,14 @@ nav {
   padding: 2rem 2rem 5rem;
 }
 
-/* Media + data */
+/* Media + data: data strip on top, full-width media below */
 .project-media-data {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 3rem;
-  align-items: start;
+  display: flex;
+  flex-direction: column-reverse; /* #project-data va segundo en el DOM pero se muestra arriba */
+  gap: 2rem;
   margin-bottom: 4rem;
 }
-@media (max-width: 760px) { .project-media-data { grid-template-columns: 1fr; gap: 2rem; } }
+@media (max-width: 760px) { .project-media-data { gap: 1.5rem; } }
 
 .video-wrap {
   position: relative;
@@ -306,8 +305,15 @@ nav {
   font-size: 0.85rem;
 }
 
-.project-data { padding-top: 0.5rem; }
-.project-data dl { display: grid; row-gap: 1.4rem; }
+.project-data {
+  border-top: 1px solid var(--border);
+  padding-top: 1.4rem;
+}
+.project-data dl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 3.5rem;
+}
 .project-data dt {
   font-size: 0.7rem;
   text-transform: uppercase;
@@ -375,9 +381,9 @@ nav {
 /* === Project detail (text + image) ==================== */
 .project-detail {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.15fr 1fr;
   gap: 3rem;
-  align-items: center;
+  align-items: start;
   margin-bottom: 3.5rem;
 }
 @media (max-width: 760px) {
@@ -405,7 +411,7 @@ nav {
 .project-gallery:empty { display: none; }
 .project-gallery img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border-radius: 8px;
   display: block;
