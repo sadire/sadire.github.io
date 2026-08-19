@@ -11,11 +11,11 @@ data: Year / Año | 2026
 data: Platform / Plataforma | Multiplatform
 
 [intro en]
-I joined the project as a technical and level designer. My main job was iterating and polishing the levels, redesigning a big part of them. Alongside that, I applied different measures to improve level performance and make them playable on Switch.
+I joined the project as a technical and level designer. My main job was iterating and polishing the levels, redesigning a big part of them (Layout and gameplay moments). Alongside that, I applied different measures to improve level performance and make them playable on Switch.
 
-The most important part for me was improving the pathing and making each area of the first levels feel unique, built around a goal instead of being a pile of loose assets.
+The most important part for me was improving the pathing and making each area of the first levels feel unique, built around a goal instead of just being a pile of loose assets.
 
 [intro es]
-Entré en el proyecto como technical y level designer. Mi trabajo principal fue iterar y pulir los niveles, rediseñando gran parte de ellos. En paralelo, apliqué distintas medidas para mejorar el rendimiento de los niveles y hacerlos jugables en Switch.
+Entré en el proyecto como technical y level designer. Mi trabajo principal fue iterar y pulir los niveles, rediseñando gran parte de ellos (layout y gameplay moments). En paralelo, apliqué distintas medidas para mejorar el rendimiento de los niveles y hacerlos jugables en Switch.
 
-Lo más importante para mí fue mejorar el pathing y conseguir que las distintas áreas de los primeros niveles se sintieran únicas, persiguiendo un objetivo, no un montón de assets sueltos.
+Lo más importante para mí fue mejorar el pathing y conseguir que las distintas áreas de los primeros niveles se sintieran únicas, construidas en torno a un objetivo en vez de ser solo un montón de assets sueltos.

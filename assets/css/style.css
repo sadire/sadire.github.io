@@ -428,6 +428,14 @@ nav {
   border-radius: 8px;
   display: block;
 }
+/* Capturas verticales (juegos de móvil): sin recorte, ratio natural */
+.project-gallery img.is-portrait {
+  aspect-ratio: auto;
+  object-fit: contain;
+  width: auto;
+  max-height: 460px;
+  margin: 0 auto;
+}
 @media (max-width: 700px) {
   .project-gallery { grid-template-columns: 1fr; }
 }

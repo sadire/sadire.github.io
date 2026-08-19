@@ -13,10 +13,10 @@ data: Platform / Plataforma | PC, PS5, Xbox, Switch 2
 data: Year / Año | 2025
 
 [intro en]
-My role was somewhere between design and programming. As a technical designer I created mechanics and gameplay moments, prototyping them, implementing them and testing what worked and what didn't.
+In this project I worked as a middle point between design and programming. As a technical designer my main focus was to prototype and iterate mechanics and gameplay moments. I also worked on level implementation and testing what worked and what didn't.
 
 [intro es]
-Mi rol estaba en un punto intermedio entre diseño y programación. Como technical designer creaba mecánicas y gameplay moments: los prototipaba, los implementaba y probaba qué funcionaba y qué no.
+En este proyecto trabajé a medio camino entre diseño y programación. Como technical designer mi foco principal era prototipar e iterar mecánicas y gameplay moments. También trabajé en la implementación de niveles y en probar qué funcionaba y qué no.
 
 [detail en]
 I wrote feature requests for the code team and built sample zones for the different tools, exploring their limits and how they could fit into the game.

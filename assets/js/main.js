@@ -127,7 +127,9 @@ function parseProjectTxt(id, raw) {
       image: dir + (meta['detail-image'] || 'detail.jpg'),
       imageAlt: title.en
     } : null,
-    gallery: [1, 2, 3].map(i => dir + 'gallery-' + i + '.jpg')
+    gallery: meta['gallery']
+      ? (meta['gallery'] === 'none' ? [] : meta['gallery'].split(',').map(s => dir + s.trim()))
+      : [1, 2, 3].map(i => dir + 'gallery-' + i + '.jpg')
   };
 }
 

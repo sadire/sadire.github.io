@@ -18,11 +18,11 @@ On Bluey my role involved design and production tasks. I took the lead on the re
 En Bluey mi rol implicaba diseño y tareas de producción. Tomé la dirección del remaster del original, en el que nos centramos en arreglar bugs, estabilizar las builds y hacer que el juego se sintiera bien.
 
 [detail en]
-In parallel I directed and designed a series of three free updates. Beyond improving the game feel, they added new content: new costumes, characters, explorable areas and a quest system to extend the play experience.
+In parallel I directed and designed a series of free updates. Beyond improving the game feel, they added new content: new costumes, characters, explorable areas and a quest system to extend the play experience.
 
 For each update I worked with the client on deciding what content it should include and how to prioritise it.
 
 [detail es]
-En paralelo dirigí y diseñé una serie de tres actualizaciones gratuitas. Más allá de mejorar el feel del juego, añadieron contenido nuevo: nuevos costumes, personajes, áreas explorables y un sistema de quests para alargar la experiencia de juego.
+En paralelo dirigí y diseñé una serie de actualizaciones gratuitas. Más allá de mejorar el feel del juego, añadieron contenido nuevo: nuevos costumes, personajes, áreas explorables y un sistema de quests para alargar la experiencia de juego.
 
 Para cada actualización trabajé con el cliente decidiendo qué contenido debía incluir y cómo priorizarlo.

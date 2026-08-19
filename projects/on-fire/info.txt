@@ -3,18 +3,22 @@ tagline: Design & Programming
 tagline.es: Diseño y programación
 category: independent
 tags: Game Design, Programming
+hero: https://www.youtube.com/watch?v=ge73QVRGVBY
+thumb: cover.png
+detail-image: cover.png
+gallery: gallery-1.png, gallery-2.png, gallery-3.png
 
 data: Role / Rol | Designer & Programmer
 data: Year / Año | 2024
 
 [intro en]
-On Fire! is mine: a procedural infinite runner I designed and programmed. I started by figuring out what the game should feel like to play, then built everything around that.
+On Fire! is an infinite runner I designed and programmed with a university colleague. I started by figuring out what the game should feel like to play, then built everything around that.
 
 [intro es]
-On Fire! es mío: un infinite runner procedural que diseñé y programé. Empecé definiendo cómo se debía sentir al jugarlo y construí todo a partir de ahí.
+On Fire! es un infinite runner que diseñé y programé junto a un compañero de la universidad. Empecé definiendo cómo se debía sentir al jugarlo y construí todo a partir de ahí.
 
 [detail en]
-Once the design was solid I needed tools, starting with level generation that let me test ideas fast without going back into the code every time. The game generates content on the fly, but it had to feel like it was put there on purpose.
+Once the design was solid I needed tools, as doing levels by hand was quite the painful process. I created a simple level editor that allowed me to quickly test ideas and generate levels. It saved the levels as simple binary files, regenerating them on the fly and making the process much, much faster.
 
 [detail es]
-Con el diseño claro necesitaba herramientas, empezando por una generación de niveles que me dejara probar ideas rápido sin volver al código cada vez. El juego genera contenido en tiempo real, pero tenía que parecer que alguien lo había puesto ahí a propósito.
+Con el diseño claro necesitaba herramientas, porque hacer los niveles a mano era un proceso bastante doloroso. Creé un editor de niveles sencillo que me permitía probar ideas rápido y generar niveles. Los guardaba como simples archivos binarios y los regeneraba al vuelo, lo que hacía el proceso mucho, mucho más rápido.

@@ -175,9 +175,11 @@ function renderProjectPage() {
   /* 4. Gallery (up to 3 images) */
   const galleryEl = document.getElementById('project-gallery');
   if (galleryEl && project.gallery && project.gallery.length) {
-    /* Missing gallery files just disappear (folders rarely have all 3) */
+    /* Missing gallery files just disappear (folders rarely have all 3).
+       Portrait shots (mobile games) keep their aspect ratio instead of the 4:3 crop. */
     galleryEl.innerHTML = project.gallery.slice(0, 3).map((src, i) =>
-      `<img src="${src}" alt="Gallery image ${i + 1}" onerror="this.remove()">`
+      `<img src="${src}" alt="Gallery image ${i + 1}" onerror="this.remove()"
+            onload="if(this.naturalHeight>this.naturalWidth)this.classList.add('is-portrait')">`
     ).join('');
   }
 
