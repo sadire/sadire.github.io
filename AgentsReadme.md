@@ -99,9 +99,9 @@ assets/images/about/photo.jpg → foto de perfil (3:4)
 | id | Título | Categoría | Estado |
 |---|---|---|---|
 | `unannounced` | Cancelled Combat Game | professional | texto real, sin imágenes (cancelado, no llevará) |
-| `bluey-videogame` | Bluey: The Videogame | professional | texto real, solo thumb (detail-image: thumb.jpg) |
-| `grinch-2` | The Grinch 2: Saving Christmas | professional | texto real, sin imágenes |
-| `fall-flat-2` | Human: Fall Flat 2 | professional | texto real, hero=YouTube, thumb+hero.jpg |
+| `bluey-videogame` | Bluey: The Videogame | professional | texto real, hero=YouTube, thumb + galería |
+| `grinch-2` | The Grinch 2: Saving Christmas | professional | texto real, hero=YouTube, galería (falta thumb) |
+| `fall-flat-2` | Human: Fall Flat 2 | professional | texto real, hero=YouTube, thumb + galería |
 | `on-fire` | On Fire! | independent | texto real, sin imágenes |
 | `itch-gamejams` | Game Jams & Student Projects | independent | external → klapa.itch.io |
 
@@ -138,7 +138,7 @@ Categorías activas:
 
 ## Pendiente
 
-- Añadir imágenes (thumb/hero/galería) a `grinch-2`, `on-fire`, `itch-gamejams` y el hero de `bluey-videogame`
+- Añadir thumb a `grinch-2` e imágenes a `on-fire` e `itch-gamejams`
 - Añadir la foto de perfil en `assets/images/about/photo.jpg` (About muestra placeholder mientras tanto)
 - Valorar reemplazar `resume.pdf` (actual: export de LinkedIn) por un PDF con mejor diseño
 - Las fechas del CV (`date` en content.js) son strings sin localizar — se muestran en inglés también en ES
