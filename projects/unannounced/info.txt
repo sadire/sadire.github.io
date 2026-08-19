@@ -2,7 +2,7 @@ title: Cancelled Combat Game
 title.es: Juego de combate cancelado
 tagline: Design & Combat Design
 tagline.es: Diseño y combat design
-category: professional
+category: independent
 tags: Game Design, Combat Design
 thumb: none
 hero: none

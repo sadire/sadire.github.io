@@ -26,7 +26,7 @@ window.PORTFOLIO_CONTENT = {
 
   "categories": {
     "professional": { "en": "Professional",             "es": "Profesional"             },
-    "independent":  { "en": "Independent Projects",     "es": "Proyectos independientes" },
+    "independent":  { "en": "Other Projects",           "es": "Otros proyectos" },
     "gamejams":     { "en": "Game Jams & Student Work", "es": "Game Jams y proyectos académicos" }
   },
 

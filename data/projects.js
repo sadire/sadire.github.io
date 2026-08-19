@@ -11,10 +11,10 @@
 // =============================================================
 
 window.PROJECT_LIST = [
-  "unannounced",
+  "fall-flat-2",
   "bluey-videogame",
   "grinch-2",
-  "fall-flat-2",
   "on-fire",
+  "unannounced",
   "itch-gamejams"
 ];
