@@ -36,7 +36,7 @@ Flujo de arranque:
 3. Llama a `renderPage()` (en `projects.js`)
 4. `renderPage()` detecta `data-page` en `<body>` y despacha al render correspondiente
 
-**Cache busting**: todos los `<script src="...">` llevan `?v=N`. Cuando se modifique un script y el usuario tenga caché stale, hay que incrementar N en todos los HTML. Versión actual: `?v=5`.
+**Cache busting**: todos los `<script src="...">` llevan `?v=N`. Cuando se modifique un script y el usuario tenga caché stale, hay que incrementar N en todos los HTML. Versión actual: `?v=7` (aplica también a `assets/css/style.css` desde v=7).
 
 ---
 
@@ -92,9 +92,9 @@ Campos fijos:
 
 | id | Título | Categoría | Estado |
 |---|---|---|---|
-| `unannounced` | Unannounced Project | professional | placeholder, sin imágenes |
-| `bluey-videogame` | Bluey: The Videogame | professional | texto real, sin imágenes |
-| `grinch-2` | Grinch 2 | professional | visible, texto placeholder, sin imágenes |
+| `unannounced` | Cancelled Combat Game | professional | texto real, sin imágenes (cancelado, no llevará) |
+| `bluey-videogame` | Bluey: The Videogame | professional | texto real, solo thumb |
+| `grinch-2` | The Grinch 2: Saving Christmas | professional | texto real, sin imágenes |
 | `fall-flat-2` | Human: Fall Flat 2 | professional | texto real, hero=YouTube embed |
 | `on-fire` | On Fire! | independent | texto real, sin imágenes |
 | `itch-gamejams` | Game Jams & Student Projects | independent | external → klapa.itch.io |
@@ -140,7 +140,8 @@ assets/images/about/photo.jpg           → foto de perfil
 - **El `id` es el slug de la URL** — cambiarlo rompe links existentes
 - **Si se modifica un `.js` de assets**, incrementar `?v=N` en todos los HTML para invalidar caché
 - **Textos de proyectos**: el usuario quiere estilo orgánico y natural. Nada de frases de IA ("from the ground up", "meaningful experiences", "I leveraged X to achieve Y"). Frases cortas, directas, en primera persona, como hablaría alguien real.
-- **`grinch-2` ya es público** (el usuario lo desveló en ago 2026) — pero su texto sigue siendo placeholder
+- **`grinch-2` ya es público** (el usuario lo desveló en ago 2026) con texto real
+- **Sin em dashes en los textos**: el usuario no quiere rayas (—) en el contenido; reestructurar la frase en su lugar
 
 ---
 
