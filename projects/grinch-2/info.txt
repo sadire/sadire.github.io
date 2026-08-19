@@ -7,7 +7,8 @@ tags: Level Design, Technical Design
 
 data: Role / Rol | Level & Technical Designer
 data: Studio / Estudio | Casual Brothers LTD
-data: Year / Año | 2024
+data: Year / Año | 2026
+data: Platform / Plataforma | Multiplatform
 
 [intro en]
 I joined the project as a technical and level designer. My main job was iterating and polishing the levels, redesigning a big part of them. Alongside that, I applied different measures to improve level performance and make them playable on Switch.

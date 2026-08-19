@@ -8,6 +8,7 @@ thumb: none
 hero: none
 
 data: Role / Rol | Game & Combat Designer
+data: Platform / Plataforma | Multiplatform
 data: Status / Estado | Cancelled
 
 [intro en]
