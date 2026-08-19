@@ -1,6 +1,7 @@
 title: The Grinch 2: Saving Christmas
 tagline: Level & Technical Design
 tagline.es: Diseño de niveles y técnico
+hero: https://www.youtube.com/watch?v=a3DI5VfL3TA
 category: professional
 tags: Level Design, Technical Design
 

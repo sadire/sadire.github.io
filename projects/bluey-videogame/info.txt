@@ -3,6 +3,7 @@ tagline: Production and Design
 tagline.es: Producción y diseño
 category: professional
 tags: Production, Game Design
+hero: https://www.youtube.com/watch?v=7jmbNh6H9Pk
 detail-image: thumb.jpg
 
 data: Role / Rol | Production / Design
