@@ -15,6 +15,7 @@ window.PROJECT_LIST = [
   "bluey-videogame",
   "grinch-2",
   "on-fire",
-  "unannounced",
-  "itch-gamejams"
+  "itch-gamejams",
+  "unannounced"
+
 ];
