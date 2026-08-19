@@ -61,6 +61,13 @@ function renderProjectsGrid() {
   const grid = document.getElementById('projects-grid');
   if (!grid) return;
 
+  if (SITE.fileProtocol) {
+    grid.innerHTML = `<p class="file-protocol-note">${SITE.lang === 'es'
+      ? 'Los proyectos no pueden cargarse abriendo el HTML directamente. Arranca preview.bat (o cualquier servidor local) o mira la web publicada.'
+      : 'Projects cannot load when opening the HTML file directly. Run preview.bat (or any local server) or check the published site.'}</p>`;
+    return;
+  }
+
   const cats   = SITE.content.categories || {};
   const groups = {};
   const order  = [];
@@ -170,9 +177,9 @@ function renderProjectPage() {
   /* 4. Gallery (up to 3 images) */
   const galleryEl = document.getElementById('project-gallery');
   if (galleryEl && project.gallery && project.gallery.length) {
+    /* Missing gallery files just disappear (folders rarely have all 3) */
     galleryEl.innerHTML = project.gallery.slice(0, 3).map((src, i) =>
-      `<img src="${src}" alt="Gallery image ${i + 1}"
-            onerror="_imgErr(this,'','media-placeholder')">`
+      `<img src="${src}" alt="Gallery image ${i + 1}" onerror="this.remove()">`
     ).join('');
   }
 

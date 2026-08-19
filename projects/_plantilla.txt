@@ -1,0 +1,59 @@
+# ============================================================
+#  PLANTILLA de proyecto — copia este archivo como
+#  projects/<id-del-proyecto>/info.txt y rellénalo.
+#  Después añade el id a la lista de data/projects.js
+#
+#  IMÁGENES (mismos nombres siempre, en la carpeta del proyecto):
+#    thumb.jpg      miniatura del grid (4:3, ~800x600)
+#    hero.jpg       cabecera de la página (16:9, ~1920x1080)
+#    detail.jpg     imagen del bloque de detalle (opcional)
+#    gallery-1.jpg  galería, hasta 3 (4:3). Si no existen no pasa nada.
+#    gallery-2.jpg
+#    gallery-3.jpg
+#
+#  Las líneas que empiezan por # son comentarios y se ignoran.
+# ============================================================
+
+title: Nombre del proyecto
+# title.es solo si es distinto al de arriba
+title.es: Nombre en español
+tagline: Short role description
+tagline.es: Descripción corta del rol
+# category: professional | independent
+category: professional
+tags: Tag One, Tag Two
+
+# hero (opcional). Si no se pone, usa hero.jpg de la carpeta.
+#   - URL de YouTube  -> vídeo embebido
+#   - archivo .mp4    -> vídeo local
+#   - none            -> sin cabecera
+# hero: https://www.youtube.com/watch?v=XXXXXXXX
+
+# thumb: none        -> sin miniatura (placeholder)
+# detail-image: hero.jpg   -> otra imagen para el bloque detalle (por defecto detail.jpg)
+# hidden: yes        -> existe pero no se muestra en la web
+# external: https://...    -> el card abre este enlace, sin página propia
+
+# Datos de la columna derecha. Formato:  Etiqueta EN / Etiqueta ES | valor
+data: Role / Rol | My Role
+data: Studio / Estudio | Studio Name
+data: Year / Año | 2025
+
+# Texto principal. Párrafos separados por línea en blanco.
+[intro en]
+First paragraph in English.
+
+Second paragraph.
+
+[intro es]
+Primer párrafo en español.
+
+Segundo párrafo.
+
+# Bloque opcional: texto a la izquierda + imagen a la derecha.
+# Si no quieres este bloque, borra las cuatro secciones [detail ...]
+[detail en]
+Detail text in English.
+
+[detail es]
+Texto de detalle en español.

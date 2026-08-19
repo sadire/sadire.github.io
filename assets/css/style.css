@@ -105,6 +105,11 @@ nav {
   gap: 1.25rem;
 }
 
+.file-protocol-note {
+  grid-column: 1 / -1;
+  color: var(--text-muted);
+  padding: 2rem 0;
+}
 @media (max-width: 880px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .projects-grid { grid-template-columns: 1fr; } }
 

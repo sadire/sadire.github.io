@@ -1,0 +1,20 @@
+title: On Fire!
+tagline: Design & Programming
+tagline.es: Diseño y programación
+category: independent
+tags: Game Design, Programming
+
+data: Role / Rol | Designer & Programmer
+data: Year / Año | 2024
+
+[intro en]
+On Fire! is mine: a procedural infinite runner I designed and programmed. I started by figuring out what the game should feel like to play, then built everything around that.
+
+[intro es]
+On Fire! es mío: un infinite runner procedural que diseñé y programé. Empecé definiendo cómo se debía sentir al jugarlo y construí todo a partir de ahí.
+
+[detail en]
+Once the design was solid I needed tools, starting with level generation that let me test ideas fast without going back into the code every time. The game generates content on the fly, but it had to feel like it was put there on purpose.
+
+[detail es]
+Con el diseño claro necesitaba herramientas, empezando por una generación de niveles que me dejara probar ideas rápido sin volver al código cada vez. El juego genera contenido en tiempo real, pero tenía que parecer que alguien lo había puesto ahí a propósito.

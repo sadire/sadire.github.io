@@ -1,0 +1,33 @@
+title: Human: Fall Flat 2
+tagline: Technical Designer & QA
+tagline.es: Diseñador técnico y QA
+category: professional
+tags: Technical Design, QA, Physics
+hero: https://www.youtube.com/watch?v=Iw118oOrKzQ
+detail-image: hero.jpg
+
+data: Role / Rol | Technical Designer & QA
+data: Developer / Desarrollador | No Brakes Games
+data: Publisher / Editor | Devolver Digital
+data: Platform / Plataforma | PC, PS5, Xbox, Switch 2
+data: Year / Año | 2025
+
+[intro en]
+My role was somewhere between design and programming. As a technical designer I created mechanics and gameplay moments, prototyping them, implementing them and testing what worked and what didn't.
+
+[intro es]
+Mi rol estaba en un punto intermedio entre diseño y programación. Como technical designer creaba mecánicas y gameplay moments: los prototipaba, los implementaba y probaba qué funcionaba y qué no.
+
+[detail en]
+I wrote feature requests for the code team and built sample zones for the different tools, exploring their limits and how they could fit into the game.
+
+I was also part of the level design process, helping shape the levels early on alongside the designers.
+
+The role also included QA responsibilities. In that department I took care of manual testing, finding and tracking bugs and keeping the builds stable.
+
+[detail es]
+Escribía feature requests para el equipo de código y montaba zonas de muestra de las distintas herramientas, explorando sus límites y cómo encajarlas en el juego.
+
+También participé en el proceso de diseño de niveles, ayudando a dar forma a los niveles desde el principio junto a los diseñadores.
+
+El rol incluía además responsabilidades de QA. En ese departamento me encargaba del testeo manual, encontrando y registrando bugs y manteniendo las builds estables.

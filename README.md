@@ -7,95 +7,84 @@ Sitio web de portafolio estático. Sin frameworks, sin build step. Se despliega 
 ## Estructura de archivos
 
 ```
-Porfolio/
+sadire.github.io/
 │
 ├── index.html          → Página principal (grid de proyectos)
 ├── about.html          → Página About
 ├── resume.html         → Página CV con descarga PDF
 ├── project.html        → Plantilla dinámica de proyecto (?id=slug)
-├── resume.pdf          → ⚠ Reemplazar con tu PDF real
+├── resume.pdf          → PDF del CV (reemplazar el archivo = actualizado)
+├── preview.bat         → Doble clic para ver la web en local
+│
+├── projects/           → ✏ UNA CARPETA POR PROYECTO
+│   ├── _plantilla.txt  →   plantilla para proyectos nuevos
+│   └── [id]/
+│       ├── info.txt    →   ✏ TODO el texto del proyecto (EN y ES)
+│       ├── thumb.jpg   →   miniatura del grid (4:3, ~800x600)
+│       ├── hero.jpg    →   cabecera de la página (16:9, ~1920x1080)
+│       ├── detail.jpg  →   imagen del bloque de detalle (opcional)
+│       └── gallery-1.jpg → galería, hasta gallery-3.jpg (opcional)
 │
 ├── data/
-│   ├── projects.js     → ✏ EDITAR AQUÍ para añadir/modificar proyectos
-│   └── content.js      → ✏ EDITAR AQUÍ para nombre, bio, CV, navegación
+│   ├── projects.js     → ✏ lista de proyectos y su ORDEN en el grid
+│   └── content.js      → ✏ nombre, bio, skills, CV, navegación, footer
 │
 └── assets/
     ├── css/style.css   → Todos los estilos
-    ├── js/
-    │   ├── main.js     → Idioma, carga de datos, nav, footer
-    │   └── projects.js → Renderizado de todas las páginas
-    └── images/
-        ├── about/
-        │   └── photo.jpg           → Tu foto de perfil
-        └── projects/
-            └── [id-del-proyecto]/
-                ├── thumb.jpg       → Miniatura del grid (ratio 4:3)
-                ├── hero.jpg        → Imagen grande en la página del proyecto
-                └── ...             → Imágenes adicionales de galería/detalle
+    ├── js/             → Código (no hace falta tocarlo)
+    └── images/about/photo.jpg → Tu foto de perfil
 ```
 
 ---
 
-## Cómo añadir un proyecto
+## Cómo editar un proyecto
 
-Edita `data/projects.js`. Copia este bloque y rellénalo:
+Abre `projects/<id>/info.txt`, edita, guarda. Al recargar la web se ve el cambio (no hay caché en los txt). El formato:
 
-```js
-{
-  "id": "nombre-del-proyecto",
-  "category": "professional",       // "professional" o "independent"
+```
+title: Nombre del proyecto
+title.es: Nombre en español (solo si es distinto)
+tagline: Short role description
+tagline.es: Descripción corta
+category: professional        (o independent)
+tags: Tag One, Tag Two
 
-  "title":   { "en": "Project Name", "es": "Nombre del Proyecto" },
-  "tagline": { "en": "Short tagline.", "es": "Tagline corto." },
-  "tags":    ["Tag 1", "Tag 2"],
-  "thumbnail": "assets/images/projects/nombre-del-proyecto/thumb.jpg",
+data: Role / Rol | My Role
+data: Year / Año | 2025
 
-  "hero":     "assets/images/projects/nombre-del-proyecto/hero.jpg",
-  "heroType": "image",              // "image", "video" o "youtube"
+[intro en]
+Texto principal en inglés. Cada párrafo separado por una línea en blanco.
 
-  "data": [
-    { "label": { "en": "Year",   "es": "Año"     }, "value": "2024" },
-    { "label": { "en": "Role",   "es": "Rol"     }, "value": "Tu rol" },
-    { "label": { "en": "Studio", "es": "Estudio" }, "value": "Nombre estudio" }
-  ],
+[intro es]
+Lo mismo en español.
 
-  "intro": {
-    "en": "Short paragraph below the hero. Keep it to 2-3 sentences.",
-    "es": "Párrafo corto bajo el hero."
-  },
-  "detail": {
-    "text": {
-      "en": "Longer text on the left. Use \\n\\n for paragraph breaks.",
-      "es": "Texto más largo a la izquierda."
-    },
-    "image": "assets/images/projects/nombre-del-proyecto/hero.jpg",
-    "imageAlt": "Description"
-  },
-  "gallery": [
-    "assets/images/projects/nombre-del-proyecto/img1.jpg",
-    "assets/images/projects/nombre-del-proyecto/img2.jpg"
-  ]
-}
+[detail en]
+Bloque opcional de texto con imagen al lado.
+
+[detail es]
+Lo mismo en español.
 ```
 
-### heroType
-| Valor | Comportamiento |
+Opciones extra (líneas sueltas antes de los bloques):
+
+| Línea | Efecto |
 |---|---|
-| `"image"` | Imagen estándar |
-| `"video"` | Archivo de vídeo (`<video>`) |
-| `"youtube"` | URL de YouTube → embed automático 16:9 |
+| `hero: https://youtube.com/...` | La cabecera es un vídeo de YouTube |
+| `hero: video.mp4` | La cabecera es un vídeo local de la carpeta |
+| `hero: none` | Sin cabecera |
+| `thumb: none` | Sin miniatura (sale placeholder) |
+| `detail-image: hero.jpg` | Usa otra imagen en el bloque detalle (por defecto `detail.jpg`) |
+| `hidden: yes` | El proyecto existe pero no se muestra |
+| `external: https://...` | El card abre ese enlace, sin página propia |
 
-### Ocultar un proyecto
-Añade `"hidden": true` al objeto. El proyecto desaparece del grid y bloquea el acceso directo por URL.
+Las líneas que empiezan por `#` son comentarios.
 
-### Card de enlace externo (ej. itch.io)
-Añade `"external": "https://..."` en lugar de contenido de proyecto. Al hacer clic abre el enlace en nueva pestaña y no genera página de detalle.
+## Cómo añadir un proyecto
 
-### Categorías disponibles
-| `"category"` | Sección |
-|---|---|
-| `"professional"` | Professional |
-| `"independent"` | Independent Projects |
+1. Crea la carpeta `projects/mi-proyecto/`
+2. Copia `projects/_plantilla.txt` dentro como `info.txt` y rellénalo
+3. Añade `"mi-proyecto"` a la lista de `data/projects.js` (el orden de la lista es el orden del grid)
+4. Ve soltando las imágenes en la carpeta cuando las tengas (si faltan salen placeholders)
 
 ---
 
@@ -105,64 +94,38 @@ Edita `data/content.js`:
 
 | Campo | Qué cambia |
 |---|---|
-| `site.name` | Nombre en la barra de navegación |
-| `home.intro` | Texto pequeño bajo el título "Work" (vacío = lorem ipsum) |
-| `about.bio` | Párrafos de texto en la página About |
-| `about.photo` | Ruta a tu foto |
-| `about.skills` | Lista de skills (array de strings) |
+| `site.name` / `site.tagline` | Nombre y subtítulo de la barra de navegación |
+| `home.intro` | Texto bajo el título "Work" |
+| `about.bio` | Párrafos de la página About |
+| `about.skills` | Lista de skills |
 | `about.contact` | Email, LinkedIn, GitHub |
-| `resume.sections` | Secciones del CV (Experience, Education, etc.) |
-| `resume.pdf` | Ruta al archivo PDF del CV |
-| `footer.text` | Texto del pie de página |
+| `resume.sections` | Secciones del CV (experiencia, formación, etc.) |
+| `footer.text` | Pie de página |
 
-Todos los campos de texto admiten versión en inglés y español:
-```js
-{ "en": "English text", "es": "Texto en español" }
-```
+Los textos ahí siguen el patrón `{ "en": "...", "es": "..." }`.
 
 ---
 
 ## Idiomas
 
-El botón **ES / EN** en la nav cambia el idioma de toda la web. La preferencia se guarda automáticamente en el navegador.
-
----
-
-## Imágenes
-
-Si una imagen no existe, el código muestra un placeholder automático — no hay que hacer nada especial.
-
-- **Miniatura (`thumb.jpg`)**: ratio **4:3** recomendado. Aparece en el grid principal.
-- **Hero (`hero.jpg`)**: ratio libre. Cabecera de la página del proyecto.
-- **Galería**: hasta 3 imágenes en el array `"gallery"`.
-
-Formatos admitidos: JPG, PNG, WebP, GIF, MP4 (para vídeo).
-
----
-
-## Despliegue
-
-El sitio está desplegado en `aimadak.com` via GitHub Pages. El repositorio de deploy es `/home/samdi/Git/sadire.github.io`.
-
-Para sincronizar cambios del directorio de trabajo al repo de deploy:
-```bash
-rsync -av --delete \
-  --exclude='.git' --exclude='node_modules' \
-  /home/samdi/Aimadak/Porfolio/ \
-  /home/samdi/Git/sadire.github.io/
-```
-Luego hacer commit y push en `/home/samdi/Git/sadire.github.io`.
+El botón **ES / EN** de la nav cambia el idioma de toda la web y se recuerda en el navegador. En los `info.txt`, el español va en `title.es:`, `tagline.es:` y los bloques `[... es]`; si falta, se usa el inglés.
 
 ---
 
 ## Previsualizar en local
 
-El servidor de preview está configurado en `.claude/launch.json` (puerto 3000).
+Doble clic en **`preview.bat`** (necesita Python instalado): arranca un servidor y abre la web en el navegador. Cierra su ventana para pararlo.
 
-También puedes lanzarlo manualmente:
+> ⚠ Abrir los HTML directamente con doble clic (`file://`) ya NO funciona: los proyectos se cargan por red y el navegador lo bloquea. Usa siempre `preview.bat` o la web publicada.
+
+---
+
+## Publicar
+
 ```bash
-python3 -m http.server 3000
+git add -A
+git commit -m "Update content"
+git push
 ```
-Luego abre `http://localhost:3000`.
 
-> Los HTML también funcionan abriéndolos directamente (`file://`) — no necesitan servidor.
+GitHub Pages actualiza `aimadak.com` en un par de minutos.

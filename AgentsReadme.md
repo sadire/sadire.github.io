@@ -6,37 +6,41 @@ Este archivo es contexto para futuros agentes de IA trabajando en este proyecto.
 
 ## Qué es este proyecto
 
-Portafolio personal de Samuel Díaz Reyes desplegado en `aimadak.com` via GitHub Pages. Sitio estático (HTML/CSS/JS puro, sin build step ni frameworks). El usuario edita únicamente los archivos en `data/` — nunca debería tocar HTML ni JS core para añadir contenido.
+Portafolio personal de Samuel Díaz Reyes desplegado en `aimadak.com` via GitHub Pages. Sitio estático (HTML/CSS/JS puro, sin build step ni frameworks). El usuario edita únicamente `projects/<id>/info.txt` (proyectos) y `data/content.js` (resto del sitio) — nunca debería tocar HTML ni JS core para añadir contenido.
 
 ---
 
 ## Principio de diseño fundamental
 
-**Todo el contenido se gestiona desde los JS de datos.** Si el usuario quiere añadir un proyecto, campo o sección nueva, la solución pasa por extender `data/projects.js` o `data/content.js` y adaptar el JS que los consume. No crear nuevos HTML por proyecto.
+**Cada proyecto vive en su carpeta `projects/<id>/`** con su `info.txt` (todo el texto, formato simple editable a mano) y sus imágenes con nombres fijos. El resto del contenido del sitio (bio, CV, nav, footer) vive en `data/content.js`. Si el usuario quiere un campo o sección nueva, la solución pasa por extender el formato del txt o `content.js` y adaptar el JS que los consume. No crear HTML por proyecto.
 
 ---
 
 ## Arquitectura
 
 ```
-data/projects.js   → fuente de verdad de proyectos (window.PORTFOLIO_PROJECTS)
-data/content.js    → fuente de verdad del sitio (window.PORTFOLIO_CONTENT)
+projects/<id>/info.txt  → fuente de verdad de cada proyecto (texto plano, ver formato abajo)
+projects/<id>/*.jpg     → imágenes del proyecto (nombres fijos)
+projects/_plantilla.txt → plantilla comentada para proyectos nuevos
+data/projects.js        → SOLO la lista de ids y su orden (window.PROJECT_LIST)
+data/content.js         → resto del sitio (window.PORTFOLIO_CONTENT)
 
-assets/js/main.js     → lee los globales, gestiona idioma (SITE.lang), expone t(), toggleLang()
+assets/js/main.js     → idioma (SITE.lang, t(), toggleLang()), loadData() que hace
+                        fetch de cada info.txt (cache: no-store) y parseProjectTxt()
 assets/js/projects.js → renderiza todas las páginas leyendo SITE.content y SITE.projects
 
-project.html          → página dinámica: lee ?id=slug de la URL y busca el proyecto en el array
+project.html          → página dinámica: lee ?id=slug de la URL
+preview.bat           → doble clic = servidor local (python) + abre el navegador
 ```
 
-Los HTML cargan datos vía `<script src="data/content.js?v=N">` y `<script src="data/projects.js?v=N">` **antes** de `main.js`. Esto permite abrir los HTML directamente en `file://` sin servidor.
-
 Flujo de arranque:
-1. `data/content.js` y `data/projects.js` → setan `window.PORTFOLIO_CONTENT` y `window.PORTFOLIO_PROJECTS`
-2. `main.js → loadData()` → copia los globales a `SITE.content` y `SITE.projects`
-3. Llama a `renderPage()` (en `projects.js`)
-4. `renderPage()` detecta `data-page` en `<body>` y despacha al render correspondiente
+1. `data/content.js` y `data/projects.js` → setean `window.PORTFOLIO_CONTENT` y `window.PROJECT_LIST`
+2. `main.js → loadData()` → fetch de `projects/<id>/info.txt` para cada id, `parseProjectTxt()` los convierte al objeto de proyecto
+3. Llama a `renderPage()` (en `projects.js`), que despacha según `data-page` del `<body>`
 
-**Cache busting**: todos los `<script src="...">` llevan `?v=N`. Cuando se modifique un script y el usuario tenga caché stale, hay que incrementar N en todos los HTML. Versión actual: `?v=7` (aplica también a `assets/css/style.css` desde v=7).
+**Importante — file:// ya no funciona**: los `info.txt` se cargan con `fetch()`, que falla en `file://`. Para previsualizar en local: `preview.bat` (requiere Python) o pedirle a Claude que arranque el server. El grid muestra un aviso si se abre por `file://`.
+
+**Cache busting**: los `<script>` y el CSS llevan `?v=N`; al modificar cualquier `.js` o el CSS, incrementar N en los 4 HTML. Versión actual: `?v=8`. Los `info.txt` NO lo necesitan: se piden con `cache: no-store`, editar y recargar basta.
 
 ---
 
@@ -45,46 +49,48 @@ Flujo de arranque:
 - Estado en `SITE.lang` (`'en'` o `'es'`), persistido en `localStorage`
 - Función `t(obj)` recibe `{ en: '...', es: '...' }` y devuelve el string del idioma activo
 - Cambiar idioma llama a `renderPage()` de nuevo, que re-renderiza todo el DOM
-- Todos los textos del JSON siguen el patrón `{ "en": "...", "es": "..." }`
+- En los `info.txt` el idioma va por sufijos (`title:` / `title.es:`, bloques `[intro en]` / `[intro es]`); si falta la variante ES se usa la EN
 
 ---
 
-## Estructura de un proyecto en data/projects.js
+## Formato de projects/<id>/info.txt
 
-Campos fijos:
+Ver `projects/_plantilla.txt` (plantilla comentada). Resumen:
 
-```js
-{
-  "id": "slug-unico",
-  "category": "professional" | "independent",
-  "hidden": true,            // opcional — oculta del grid y bloquea URL directa
-  "external": "https://...", // opcional — card que abre enlace externo, sin página de detalle
+```
+title: Nombre                    ·  title.es: opcional si difiere
+tagline: ... / tagline.es: ...
+category: professional | independent
+tags: Tag One, Tag Two           ·  lista separada por comas, sin localizar
+hero: (opcional) URL YouTube | archivo .mp4 | none · por defecto hero.jpg
+thumb: none                      ·  (opcional) sin miniatura
+detail-image: hero.jpg           ·  (opcional) imagen del bloque detalle, por defecto detail.jpg
+hidden: yes                      ·  (opcional) no se muestra en la web
+external: https://...            ·  (opcional) card-enlace sin página propia
 
-  "title":   { "en": "...", "es": "..." },
-  "tagline": { "en": "...", "es": "..." },
-  "tags":    ["Tag1", "Tag2"],
-  "thumbnail": "assets/images/projects/[id]/thumb.jpg",
+data: Label EN / Label ES | valor     (repetible, columna derecha de la página)
 
-  "hero":     "ruta-o-url",
-  "heroType": "image" | "video" | "youtube",  // youtube acepta URL completa de YouTube
-
-  "data": [
-    { "label": { "en": "...", "es": "..." }, "value": "..." }
-  ],
-
-  "intro": { "en": "...", "es": "..." },       // párrafo corto bajo el hero
-
-  "detail": {                                   // texto izquierda + imagen derecha
-    "text": { "en": "...", "es": "..." },       // soporta \n\n para párrafos
-    "image": "ruta",
-    "imageAlt": "..."
-  },
-
-  "gallery": ["img1.jpg", "img2.jpg", "img3.jpg"]  // hasta 3 imágenes
-}
+[intro en] / [intro es]          ·  texto principal, párrafos = línea en blanco
+[detail en] / [detail es]        ·  bloque opcional texto+imagen; sin él no se renderiza
 ```
 
-`detail` y `gallery` pueden ser `null` / `[]` — la sección no se renderiza.
+Las líneas que empiezan por `#` son comentarios. El parser está en `assets/js/main.js → parseProjectTxt()`.
+
+**Añadir un proyecto** = crear `projects/<nuevo-id>/` con `info.txt` + añadir el id a `window.PROJECT_LIST` en `data/projects.js` (el orden de esa lista es el orden del grid).
+
+---
+
+## Imágenes
+
+Nombres fijos dentro de `projects/<id>/`. Si faltan, hay placeholders automáticos (y las de galería simplemente no aparecen); no hay que hacer nada especial.
+
+```
+projects/<id>/thumb.jpg       → miniatura grid (4:3, ~800x600)
+projects/<id>/hero.jpg        → cabecera página proyecto (16:9, ~1920x1080)
+projects/<id>/detail.jpg      → imagen del bloque detalle (override con detail-image:)
+projects/<id>/gallery-1.jpg   → galería, hasta gallery-3.jpg (4:3)
+assets/images/about/photo.jpg → foto de perfil (3:4)
+```
 
 ---
 
@@ -93,9 +99,9 @@ Campos fijos:
 | id | Título | Categoría | Estado |
 |---|---|---|---|
 | `unannounced` | Cancelled Combat Game | professional | texto real, sin imágenes (cancelado, no llevará) |
-| `bluey-videogame` | Bluey: The Videogame | professional | texto real, solo thumb |
+| `bluey-videogame` | Bluey: The Videogame | professional | texto real, solo thumb (detail-image: thumb.jpg) |
 | `grinch-2` | The Grinch 2: Saving Christmas | professional | texto real, sin imágenes |
-| `fall-flat-2` | Human: Fall Flat 2 | professional | texto real, hero=YouTube embed |
+| `fall-flat-2` | Human: Fall Flat 2 | professional | texto real, hero=YouTube, thumb+hero.jpg |
 | `on-fire` | On Fire! | independent | texto real, sin imágenes |
 | `itch-gamejams` | Game Jams & Student Projects | independent | external → klapa.itch.io |
 
@@ -103,7 +109,7 @@ Campos fijos:
 
 ## Categorías
 
-Definidas en `data/content.js → categories`. El orden de secciones en el grid sigue el orden de primera aparición en el array de proyectos.
+Definidas en `data/content.js → categories`. El orden de secciones en el grid sigue el orden de primera aparición en `PROJECT_LIST`.
 
 Categorías activas:
 - `"professional"` — sección superior
@@ -113,45 +119,32 @@ Categorías activas:
 
 ---
 
-## Imágenes
-
-Las imágenes del usuario aún no existen en su mayoría. El código maneja su ausencia con placeholders automáticos (patrón diagonal + icono cámara + nombre proyecto). No hay que hacer nada especial cuando faltan.
-
-Rutas esperadas:
-```
-assets/images/projects/[id]/thumb.jpg   → miniatura grid (4:3)
-assets/images/projects/[id]/hero.jpg    → cabecera página proyecto
-assets/images/about/photo.jpg           → foto de perfil
-```
-
----
-
 ## Despliegue
 
-- Directorio de trabajo: `/home/samdi/Aimadak/Porfolio/`
-- Repo de deploy: `/home/samdi/Git/sadire.github.io/` (CNAME: aimadak.com)
-- Sincronizar con rsync y luego commit+push en el repo de deploy
+- Repo: `C:\Users\samdi\sadire.github.io` (CNAME: aimadak.com), GitHub Pages sobre `main`
+- **Claude commitea en local pero NUNCA hace push** — el push lo hace siempre el usuario
 
 ---
 
 ## Cosas críticas al modificar
 
-- **No romper `{ "en": ..., "es": ... }`** en los datos — `t()` lo espera en todos los textos
-- **El `id` es el slug de la URL** — cambiarlo rompe links existentes
-- **Si se modifica un `.js` de assets**, incrementar `?v=N` en todos los HTML para invalidar caché
-- **Textos de proyectos**: el usuario quiere estilo orgánico y natural. Nada de frases de IA ("from the ground up", "meaningful experiences", "I leveraged X to achieve Y"). Frases cortas, directas, en primera persona, como hablaría alguien real.
+- **No romper el patrón en/es** — `t()` lo espera en todos los textos; en los txt, sufijo `.es` y bloques `[... es]`
+- **El `id` es el slug de la URL y el nombre de la carpeta** — cambiarlo rompe links existentes
+- **Si se modifica un `.js` o el CSS**, incrementar `?v=N` en los 4 HTML (los txt no lo necesitan)
+- **Textos**: estilo orgánico y natural, primera persona, frases cortas. Nada de frases de IA ("from the ground up", "meaningful experiences", "I leveraged X"). **Sin em dashes (—)**: reestructurar la frase en su lugar
 - **`grinch-2` ya es público** (el usuario lo desveló en ago 2026) con texto real
-- **Sin em dashes en los textos**: el usuario no quiere rayas (—) en el contenido; reestructurar la frase en su lugar
 
 ---
 
 ## Pendiente
 
-- Añadir imágenes reales (thumb + hero) a los proyectos que faltan (`unannounced`, `on-fire`, `itch-gamejams`)
+- Añadir imágenes (thumb/hero/galería) a `grinch-2`, `on-fire`, `itch-gamejams` y el hero de `bluey-videogame`
 - Añadir la foto de perfil en `assets/images/about/photo.jpg` (About muestra placeholder mientras tanto)
 - Valorar reemplazar `resume.pdf` (actual: export de LinkedIn) por un PDF con mejor diseño
-- Las fechas del CV (`date`) son strings sin localizar — se muestran en inglés también en ES
+- Las fechas del CV (`date` en content.js) son strings sin localizar — se muestran en inglés también en ES
 
 ## Hecho (ago 2026)
 
-- `data/content.js` rellenado con contenido real: bio, skills, contacto (email, LinkedIn, GitHub), `home.intro` y todas las secciones del CV (experiencia, formación, aptitudes, idiomas, voluntariado), migrado del antiguo `js/translations.js`
+- `data/content.js` rellenado con contenido real (bio, skills, contacto, CV completo), migrado del antiguo `js/translations.js`
+- Textos de los 5 proyectos reescritos en tono natural EN/ES; Grinch 2 desvelado con título y datos reales; `unannounced` pasó a Cancelled Combat Game
+- Reestructura: cada proyecto en `projects/<id>/` con `info.txt` editable + imágenes; `data/projects.js` reducido a la lista de ids

@@ -1,0 +1,21 @@
+title: Cancelled Combat Game
+title.es: Juego de combate cancelado
+tagline: Design & Combat Design
+tagline.es: Diseño y combat design
+category: professional
+tags: Game Design, Combat Design
+thumb: none
+hero: none
+
+data: Role / Rol | Game & Combat Designer
+data: Status / Estado | Cancelled
+
+[intro en]
+A combat game that never made it to release. I developed the project's systems and design, and built the first implementations of the combat loop.
+
+A lot of the work happened between departments, keeping everyone moving in the same direction. I also worked with the production company to align the creative vision.
+
+[intro es]
+Un juego de combate que no llegó a salir. Desarrollé los sistemas y el diseño del proyecto, y las primeras implementaciones del loop de combate.
+
+Buena parte del trabajo fue entre departamentos, manteniendo a todos en la misma dirección. También trabajé con la productora alineando la visión creativa.
