@@ -380,7 +380,8 @@ nav {
   align-items: start;
   margin-bottom: 3.5rem;
 }
-.detail-image img { margin-top: 0.35rem; } /* alinea la imagen con la primera línea del texto */
+.detail-image img,
+.detail-image .video-wrap { margin-top: 0.35rem; } /* alinea con la primera línea del texto */
 @media (max-width: 760px) {
   .project-detail { grid-template-columns: 1fr; gap: 2rem; }
 }
@@ -406,7 +407,7 @@ nav {
 .project-gallery:empty { display: none; }
 .project-gallery img {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 8px;
   display: block;

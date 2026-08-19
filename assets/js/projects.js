@@ -116,29 +116,16 @@ function renderProjectPage() {
   /* Hero */
   document.getElementById('project-title').textContent = t(project.title);
 
-  /* Media */
+  /* Media.
+     Si el proyecto tiene vídeo Y bloque detail, se intercambian:
+     la imagen del detail sube a la cabecera y el vídeo baja al detail. */
+  const swapVideo = !!(project.detail && project.hero &&
+    (project.heroType === 'youtube' || project.heroType === 'video'));
+
   const mediaEl = document.getElementById('project-media');
-  if (project.heroType === 'youtube') {
-    const ytId = _youtubeId(project.hero);
-    mediaEl.innerHTML = ytId
-      ? `<div class="video-wrap">
-           <iframe src="https://www.youtube.com/embed/${ytId}"
-             frameborder="0" allowfullscreen
-             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
-           </iframe>
-         </div>`
-      : `<div class="media-placeholder">Invalid YouTube URL</div>`;
-  } else if (project.heroType === 'video') {
-    mediaEl.innerHTML = `
-      <video src="${project.hero}" controls playsinline>
-        Your browser does not support video.
-      </video>`;
-  } else if (project.hero) {
-    mediaEl.innerHTML = `<img src="${project.hero}" alt="${t(project.title)}"
-      onerror="this.outerHTML='<div class=\\'media-placeholder\\'>No image</div>'">`;
-  } else {
-    mediaEl.innerHTML = `<div class="media-placeholder">No media</div>`;
-  }
+  mediaEl.innerHTML = swapVideo
+    ? _mediaHtml(project.detail.image, 'image', t(project.title))
+    : _mediaHtml(project.hero, project.heroType, t(project.title));
 
   /* Data (year, role, etc.) */
   const dataEl = document.getElementById('project-data');
@@ -160,13 +147,18 @@ function renderProjectPage() {
       .join('');
   }
 
-  /* 3. Text left + image right */
+  /* 3. Text left + image right (o el vídeo, si hubo intercambio) */
   const detailEl = document.getElementById('project-detail');
   if (detailEl && project.detail) {
-    const imgHtml = project.detail.image
-      ? `<img src="${project.detail.image}" alt="${project.detail.imageAlt || ''}"
-             onerror="_imgErr(this,'','detail-placeholder')">`
-      : `<div class="media-placeholder">${_camIcon}</div>`;
+    let imgHtml;
+    if (swapVideo) {
+      imgHtml = _mediaHtml(project.hero, project.heroType, t(project.title));
+    } else if (project.detail.image) {
+      imgHtml = `<img src="${project.detail.image}" alt="${project.detail.imageAlt || ''}"
+             onerror="_imgErr(this,'','detail-placeholder')">`;
+    } else {
+      imgHtml = `<div class="media-placeholder">${_camIcon}</div>`;
+    }
     detailEl.innerHTML = `
       <div class="detail-text">
         ${t(project.detail.text).split('\n\n').map(p => `<p>${p.trim()}</p>`).join('')}
@@ -295,6 +287,32 @@ function renderResumePage() {
 }
 
 /* ── Helpers ─────────────────────────────────────────── */
+
+/* HTML para un slot de media: youtube embed, <video>, <img> o placeholder */
+function _mediaHtml(src, type, alt) {
+  if (type === 'youtube') {
+    const ytId = _youtubeId(src);
+    return ytId
+      ? `<div class="video-wrap">
+           <iframe src="https://www.youtube.com/embed/${ytId}"
+             frameborder="0" allowfullscreen
+             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+           </iframe>
+         </div>`
+      : `<div class="media-placeholder">Invalid YouTube URL</div>`;
+  }
+  if (type === 'video') {
+    return `<video src="${src}" controls playsinline>
+        Your browser does not support video.
+      </video>`;
+  }
+  if (src) {
+    return `<img src="${src}" alt="${(alt || '').replace(/"/g, '&quot;')}"
+      onerror="this.outerHTML='<div class=\\'media-placeholder\\'>No image</div>'">`;
+  }
+  return `<div class="media-placeholder">No media</div>`;
+}
+
 function _youtubeId(url) {
   if (!url) return null;
   const m = url.match(/(?:v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{11})/);
