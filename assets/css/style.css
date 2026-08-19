@@ -266,10 +266,10 @@ nav {
 /* Media + data */
 .project-media-data {
   display: grid;
-  grid-template-columns: 1.75fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   gap: 3rem;
   align-items: start;
-  margin-bottom: 4rem;
+  margin-bottom: 3.5rem;
 }
 @media (max-width: 760px) { .project-media-data { grid-template-columns: 1fr; gap: 2rem; } }
 
@@ -291,7 +291,9 @@ nav {
 
 .project-media img,
 .project-media video {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
+  max-height: 400px; /* que la cabecera no se coma la página */
   border-radius: 8px;
   background: var(--surface);
 }
@@ -361,7 +363,18 @@ nav {
 
 /* === Project intro ===================================== */
 .project-intro {
-  margin-bottom: 3.5rem;
+  margin-bottom: 2.25rem;
+}
+/* Intro con el vídeo al lado (proyectos con vídeo + detail) */
+.project-intro.with-media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+.intro-media .video-wrap { margin-top: 0.35rem; }
+@media (max-width: 760px) {
+  .project-intro.with-media { grid-template-columns: 1fr; gap: 2rem; }
 }
 .project-intro p {
   font-size: 1rem;
@@ -382,6 +395,9 @@ nav {
 }
 .detail-image img,
 .detail-image .video-wrap { margin-top: 0.35rem; } /* alinea con la primera línea del texto */
+/* Detail sin imagen (el vídeo subió a la intro): solo texto */
+.project-detail.text-only { display: block; }
+.project-detail.text-only .detail-text p { max-width: 66ch; }
 @media (max-width: 760px) {
   .project-detail { grid-template-columns: 1fr; gap: 2rem; }
 }

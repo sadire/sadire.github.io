@@ -138,32 +138,38 @@ function renderProjectPage() {
     `).join('')
   }</dl>`;
 
-  /* 2. Intro paragraph */
+  /* 2. Intro paragraph (con el vídeo al lado cuando hay intercambio) */
   const introEl = document.getElementById('project-intro');
   if (introEl && project.intro) {
-    introEl.innerHTML = t(project.intro)
+    const paras = t(project.intro)
       .split('\n\n')
       .map(p => `<p>${p.trim()}</p>`)
       .join('');
+    introEl.classList.toggle('with-media', swapVideo);
+    introEl.innerHTML = swapVideo
+      ? `<div class="intro-text">${paras}</div>
+         <div class="intro-media">${_mediaHtml(project.hero, project.heroType, t(project.title))}</div>`
+      : paras;
   }
 
-  /* 3. Text left + image right (o el vídeo, si hubo intercambio) */
+  /* 3. Text left + image right (solo texto si el vídeo subió a la intro) */
   const detailEl = document.getElementById('project-detail');
   if (detailEl && project.detail) {
-    let imgHtml;
-    if (swapVideo) {
-      imgHtml = _mediaHtml(project.hero, project.heroType, t(project.title));
-    } else if (project.detail.image) {
-      imgHtml = `<img src="${project.detail.image}" alt="${project.detail.imageAlt || ''}"
-             onerror="_imgErr(this,'','detail-placeholder')">`;
-    } else {
-      imgHtml = `<div class="media-placeholder">${_camIcon}</div>`;
-    }
-    detailEl.innerHTML = `
+    const textHtml = `
       <div class="detail-text">
         ${t(project.detail.text).split('\n\n').map(p => `<p>${p.trim()}</p>`).join('')}
-      </div>
-      <div class="detail-image">${imgHtml}</div>`;
+      </div>`;
+    detailEl.classList.toggle('text-only', swapVideo);
+    if (swapVideo) {
+      detailEl.innerHTML = textHtml;
+    } else {
+      const imgHtml = project.detail.image
+        ? `<img src="${project.detail.image}" alt="${project.detail.imageAlt || ''}"
+               onerror="_imgErr(this,'','detail-placeholder')">`
+        : `<div class="media-placeholder">${_camIcon}</div>`;
+      detailEl.innerHTML = `${textHtml}
+        <div class="detail-image">${imgHtml}</div>`;
+    }
   }
 
   /* 4. Gallery (up to 3 images) */
