@@ -4,7 +4,7 @@ tagline.es: Diseño y programación
 category: independent
 tags: Game Design, Programming
 hero: https://www.youtube.com/watch?v=ge73QVRGVBY
-thumb: cover.png
+thumb: thumb.png
 detail-image: cover.png
 gallery: gallery-1.png, gallery-2.png, gallery-3.png
 

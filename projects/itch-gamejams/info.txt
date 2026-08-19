@@ -4,3 +4,4 @@ tagline: View on itch.io
 tagline.es: Ver en itch.io
 category: independent
 external: https://klapa.itch.io/
+thumb: thumb.png
