@@ -4,6 +4,7 @@ tagline.es: Diseño de niveles y técnico
 hero: https://www.youtube.com/watch?v=a3DI5VfL3TA
 category: professional
 tags: Level Design, Technical Design
+thumb: thumb.avif
 
 data: Role / Rol | Level & Technical Designer
 data: Studio / Estudio | Casual Brothers LTD
