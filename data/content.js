@@ -35,19 +35,22 @@ window.PORTFOLIO_CONTENT = {
     "photo": "assets/images/about/photo.jpg",
     "bio": [
       {
-        "en": "I'm a game designer and producer from Las Palmas de Gran Canaria. Right now I lead design and production at Casual Brothers, coordinating an 8-person team on a co-op multiplayer project.",
-        "es": "Soy diseñador y productor de videojuegos de Las Palmas de Gran Canaria. Actualmente dirijo el diseño y la producción en Casual Brothers, coordinando un equipo de 8 personas en un proyecto cooperativo multijugador."
+        "en": "I'm a game designer and producer from Las Palmas de Gran Canaria. Right now I work as Lead Designer and Producer at Casual Brothers, coordinating an 8-person team on a co-op multiplayer project.",
+        "es": "Soy diseñador y productor de videojuegos de Las Palmas de Gran Canaria. Actualmente trabajo como Lead Designer y productor en Casual Brothers, coordinando un equipo de 8 personas en un proyecto cooperativo multijugador."
       },
       {
-        "en": "Before that I spent over three years at No Brakes Games prototyping levels and systems and running QA, and a few months at Sala Scala building VR mechanics for escape-room attractions. Coming from QA means I spot problems early and care a lot about polish.",
-        "es": "Antes pasé más de tres años en No Brakes Games prototipando niveles y sistemas y llevando el QA, y unos meses en Sala Scala implementando mecánicas VR para atracciones de escape room. Venir de QA hace que detecte los problemas pronto y que me importe mucho el pulido."
+        "en": "Before that I spent over three years at No Brakes Games as a Technical Designer, prototyping levels and systems and running QA. I've also worked in VR: a few months at Sala Scala building a suite of multiplayer VR apps.",
+        "es": "Antes pasé más de tres años en No Brakes Games como technical designer, prototipando niveles y sistemas y llevando el QA. También he trabajado en VR: unos meses en Sala Scala construyendo una suite de aplicaciones VR multijugador."
+      },
+      {
+        "en": "What I care about most is the player experience: creating moments people remember and cutting down friction wherever I find it. My QA background also gave me an eye for quality, so I spot the rough edges early and polish until they're gone.",
+        "es": "Lo que más me importa es la experiencia del jugador: crear momentos que se recuerden y reducir la fricción allá donde la encuentre. Mi background en QA me ha dado además un ojo para la calidad: detecto pronto los bordes sin pulir y no paro hasta quitarlos."
       }
     ],
     "skills": ["Game Design", "Production", "Prototyping", "Unity", "Unreal Engine", "FMOD", "QA"],
     "contact": {
       "email":    "sadire.95@gmail.com",
-      "linkedin": "https://www.linkedin.com/in/samuel-diazreyes",
-      "github":   "https://github.com/sadire"
+      "linkedin": "https://www.linkedin.com/in/samuel-diazreyes"
     }
   },
 
