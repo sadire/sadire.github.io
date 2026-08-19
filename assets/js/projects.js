@@ -116,19 +116,15 @@ function renderProjectPage() {
   /* Hero */
   document.getElementById('project-title').textContent = t(project.title);
 
-  /* Media.
-     Si el proyecto tiene vídeo Y bloque detail, se intercambian:
-     la imagen del detail sube a la cabecera y el vídeo baja al detail. */
-  const swapVideo = !!(project.detail && project.hero &&
-    (project.heroType === 'youtube' || project.heroType === 'video'));
-
+  /* Media: el vídeo o imagen del proyecto, único protagonista de la cabecera */
   const mediaEl = document.getElementById('project-media');
-  mediaEl.innerHTML = swapVideo
-    ? _mediaHtml(project.detail.image, 'image', t(project.title))
-    : _mediaHtml(project.hero, project.heroType, t(project.title));
+  mediaEl.innerHTML = _mediaHtml(project.hero, project.heroType, t(project.title));
 
-  /* Data (year, role, etc.) */
+  /* Data (year, role, etc.) + intro debajo: juntos igualan la altura del vídeo */
   const dataEl = document.getElementById('project-data');
+  const introHtml = project.intro
+    ? `<div class="data-intro">${t(project.intro).split('\n\n').map(p => `<p>${p.trim()}</p>`).join('')}</div>`
+    : '';
   dataEl.innerHTML = `<dl>${
     (project.data || []).map(item => `
       <div>
@@ -136,40 +132,20 @@ function renderProjectPage() {
         <dd>${item.value}</dd>
       </div>
     `).join('')
-  }</dl>`;
+  }</dl>${introHtml}`;
 
-  /* 2. Intro paragraph (con el vídeo al lado cuando hay intercambio) */
-  const introEl = document.getElementById('project-intro');
-  if (introEl && project.intro) {
-    const paras = t(project.intro)
-      .split('\n\n')
-      .map(p => `<p>${p.trim()}</p>`)
-      .join('');
-    introEl.classList.toggle('with-media', swapVideo);
-    introEl.innerHTML = swapVideo
-      ? `<div class="intro-text">${paras}</div>
-         <div class="intro-media">${_mediaHtml(project.hero, project.heroType, t(project.title))}</div>`
-      : paras;
-  }
-
-  /* 3. Text left + image right (solo texto si el vídeo subió a la intro) */
+  /* 3. Text left + image right */
   const detailEl = document.getElementById('project-detail');
   if (detailEl && project.detail) {
-    const textHtml = `
+    const imgHtml = project.detail.image
+      ? `<img src="${project.detail.image}" alt="${project.detail.imageAlt || ''}"
+             onerror="_imgErr(this,'','detail-placeholder')">`
+      : `<div class="media-placeholder">${_camIcon}</div>`;
+    detailEl.innerHTML = `
       <div class="detail-text">
         ${t(project.detail.text).split('\n\n').map(p => `<p>${p.trim()}</p>`).join('')}
-      </div>`;
-    detailEl.classList.toggle('text-only', swapVideo);
-    if (swapVideo) {
-      detailEl.innerHTML = textHtml;
-    } else {
-      const imgHtml = project.detail.image
-        ? `<img src="${project.detail.image}" alt="${project.detail.imageAlt || ''}"
-               onerror="_imgErr(this,'','detail-placeholder')">`
-        : `<div class="media-placeholder">${_camIcon}</div>`;
-      detailEl.innerHTML = `${textHtml}
-        <div class="detail-image">${imgHtml}</div>`;
-    }
+      </div>
+      <div class="detail-image">${imgHtml}</div>`;
   }
 
   /* 4. Gallery (up to 3 images) */

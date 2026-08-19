@@ -310,6 +310,18 @@ nav {
 
 .project-data { padding-top: 0.5rem; }
 .project-data dl { display: grid; row-gap: 1.4rem; }
+.data-intro {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.data-intro p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #333;
+  margin-bottom: 0.85rem;
+}
+.data-intro p:last-child { margin-bottom: 0; }
 .project-data dt {
   font-size: 0.7rem;
   text-transform: uppercase;
@@ -361,21 +373,9 @@ nav {
   color: #333;
 }
 
-/* === Project intro ===================================== */
-.project-intro {
-  margin-bottom: 2.25rem;
-}
-/* Intro con el vídeo al lado (proyectos con vídeo + detail) */
-.project-intro.with-media {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: start;
-}
-.intro-media .video-wrap { margin-top: 0.35rem; }
-@media (max-width: 760px) {
-  .project-intro.with-media { grid-template-columns: 1fr; gap: 2rem; }
-}
+/* === Project intro (la intro vive en la columna de datos: .data-intro) === */
+.project-intro { margin-bottom: 2.25rem; }
+.project-intro:empty { display: none; }
 .project-intro p {
   font-size: 1rem;
   line-height: 1.85;
@@ -393,11 +393,7 @@ nav {
   align-items: start;
   margin-bottom: 3.5rem;
 }
-.detail-image img,
-.detail-image .video-wrap { margin-top: 0.35rem; } /* alinea con la primera línea del texto */
-/* Detail sin imagen (el vídeo subió a la intro): solo texto */
-.project-detail.text-only { display: block; }
-.project-detail.text-only .detail-text p { max-width: 66ch; }
+.detail-image img { margin-top: 0.35rem; } /* alinea con la primera línea del texto */
 @media (max-width: 760px) {
   .project-detail { grid-template-columns: 1fr; gap: 2rem; }
 }
@@ -409,7 +405,9 @@ nav {
 }
 .detail-text p:last-child { margin-bottom: 0; }
 .detail-image img {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
+  max-height: 520px; /* capturas verticales (móvil) sin comerse la página */
   border-radius: 8px;
 }
 
@@ -423,7 +421,7 @@ nav {
 .project-gallery:empty { display: none; }
 .project-gallery img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9; /* las capturas de juego son 16:9: sin recorte */
   object-fit: cover;
   border-radius: 8px;
   display: block;
