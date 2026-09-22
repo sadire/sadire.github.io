@@ -88,11 +88,17 @@ nav {
   line-height: 1.05;
 }
 .home-intro {
-  margin-top: 1rem;
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  max-width: 52ch;
-  line-height: 1.6;
+  margin-top: 1.25rem;
+  font-size: 1rem;
+  color: #444;
+  max-width: 56ch;
+  line-height: 1.7;
+}
+.home-intro p { margin-bottom: 0.55rem; }
+.home-intro p:last-child { margin-bottom: 0; }
+.home-intro p:first-child { /* el saludo */
+  font-weight: 600;
+  color: var(--text);
 }
 
 /* === Projects grid ===================================== */

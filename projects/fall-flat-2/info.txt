@@ -1,12 +1,12 @@
 title: Human: Fall Flat 2
-tagline: Technical Designer & QA
-tagline.es: Diseñador técnico y QA
+tagline: Technical & Level Design, QA
+tagline.es: Diseño técnico, de niveles y QA
 category: professional
-tags: Technical Design, QA, Physics
+tags: Technical Design, Level Design, QA, Physics
 hero: https://www.youtube.com/watch?v=Iw118oOrKzQ
 detail-image: none
 
-data: Role / Rol | Technical Designer & QA
+data: Role / Rol | Technical & Level Designer, QA
 data: Developer / Desarrollador | No Brakes Games
 data: Publisher / Editor | Devolver Digital
 data: Platform / Plataforma | PC, PS5, Xbox, Switch 2

@@ -54,8 +54,15 @@ function renderProjectsGrid() {
 
   const introEl = document.querySelector('.page-header .home-intro');
   if (introEl) {
-    const text = t(SITE.content.home.intro);
-    introEl.textContent = text || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+    const intro = t(SITE.content.home.intro);
+    const paras = (Array.isArray(intro) ? intro : [intro])
+      .map(s => String(s).trim()).filter(Boolean);
+    introEl.innerHTML = '';
+    paras.forEach(s => {
+      const el = document.createElement('p');
+      el.textContent = s; /* textContent: escapa solo cosas como "<3" */
+      introEl.appendChild(el);
+    });
   }
 
   const grid = document.getElementById('projects-grid');

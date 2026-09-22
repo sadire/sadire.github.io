@@ -19,8 +19,16 @@ window.PORTFOLIO_CONTENT = {
   "home": {
     "title": { "en": "Work", "es": "Trabajo" },
     "intro": {
-      "en": "A selection of projects I've worked on, from studio titles to personal experiments.",
-      "es": "Una selección de proyectos en los que he trabajado, desde títulos de estudio hasta experimentos personales."
+      "en": [
+        "Hello!",
+        "I'm Samuel, a Unity/Unreal Technical and Level Designer, currently working as Lead Designer at Casual Brothers.",
+        "These are projects that I kinda like. And that I'm allowed to show. <3"
+      ],
+      "es": [
+        "¡Hola!",
+        "Soy Samuel, Technical y Level Designer en Unity/Unreal, actualmente Lead Designer en Casual Brothers.",
+        "Estos son proyectos que me gustan bastante. Y que puedo enseñar. <3"
+      ]
     }
   },
 

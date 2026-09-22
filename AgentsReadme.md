@@ -40,7 +40,7 @@ Flujo de arranque:
 
 **Importante — file:// ya no funciona**: los `info.txt` se cargan con `fetch()`, que falla en `file://`. Para previsualizar en local: `preview.bat` (requiere Python) o pedirle a Claude que arranque el server. El grid muestra un aviso si se abre por `file://`.
 
-**Cache busting**: los `<script>` y el CSS llevan `?v=N`; al modificar cualquier `.js` o el CSS, incrementar N en los 4 HTML. Versión actual: `?v=8`. Los `info.txt` NO lo necesitan: se piden con `cache: no-store`, editar y recargar basta.
+**Cache busting**: los `<script>` y el CSS llevan `?v=N`; al modificar cualquier `.js` o el CSS, incrementar N en los 4 HTML. Versión actual: `?v=18`. El favicon lleva su propio `?v=N` (ahora `?v=2`): súbelo si se cambia el .ico. Los `info.txt` NO lo necesitan: se piden con `cache: no-store`, editar y recargar basta.
 
 ---
 
@@ -63,8 +63,10 @@ tagline: ... / tagline.es: ...
 category: professional | independent
 tags: Tag One, Tag Two           ·  lista separada por comas, sin localizar
 hero: (opcional) URL YouTube | archivo .mp4 | none · por defecto hero.jpg
-thumb: none                      ·  (opcional) sin miniatura
-detail-image: hero.jpg           ·  (opcional) imagen del bloque detalle, por defecto detail.jpg
+thumb: none | archivo.png        ·  (opcional) sin miniatura, o un archivo concreto
+detail-image: none | archivo     ·  none = detalle solo texto (formato actual de todas
+                                    las páginas); por defecto detail.jpg
+gallery: a.png, b.png, c.png     ·  (opcional) archivos concretos; por defecto gallery-1..3.jpg
 hidden: yes                      ·  (opcional) no se muestra en la web
 external: https://...            ·  (opcional) card-enlace sin página propia
 
@@ -98,12 +100,16 @@ assets/images/about/photo.jpg → foto de perfil (3:4)
 
 | id | Título | Categoría | Estado |
 |---|---|---|---|
-| `unannounced` | Cancelled Combat Game | professional | texto real, sin imágenes (cancelado, no llevará) |
-| `bluey-videogame` | Bluey: The Videogame | professional | texto real, hero=YouTube, thumb + galería |
-| `grinch-2` | The Grinch 2: Saving Christmas | professional | texto real, hero=YouTube, galería (falta thumb) |
-| `fall-flat-2` | Human: Fall Flat 2 | professional | texto real, hero=YouTube, thumb + galería |
-| `on-fire` | On Fire! | independent | texto real, sin imágenes |
-| `itch-gamejams` | Game Jams & Student Projects | independent | external → klapa.itch.io |
+Orden actual del grid (definido en `data/projects.js`):
+
+| id | Título | Categoría | Estado |
+|---|---|---|---|
+| `fall-flat-2` | Human: Fall Flat 2 | professional | completo: hero=YouTube, thumb + galería |
+| `bluey-videogame` | Bluey: The Videogame | professional | completo: hero=YouTube, thumb + galería |
+| `grinch-2` | The Grinch 2: Saving Christmas | professional | completo: hero=YouTube, thumb.avif + galería |
+| `on-fire` | On Fire! | independent | hero=YouTube, thumb + galería vertical (juego de móvil) |
+| `itch-gamejams` | Game Jams & Student Projects | independent | external → klapa.itch.io, thumb con logo sobre gris |
+| `unannounced` | Cancelled Combat Game | independent | texto real, sin imágenes a propósito (cancelado) |
 
 ---
 
@@ -113,7 +119,7 @@ Definidas en `data/content.js → categories`. El orden de secciones en el grid 
 
 Categorías activas:
 - `"professional"` — sección superior
-- `"independent"` — sección con divisor "INDEPENDENT PROJECTS"
+- `"independent"` — etiquetada **"Other Projects" / "Otros proyectos"** (incluye el juego cancelado)
 
 `"gamejams"` está definida en content.js pero sin uso activo (el card de itch.io usa `"independent"`).
 
@@ -133,15 +139,17 @@ Categorías activas:
 - **Si se modifica un `.js` o el CSS**, incrementar `?v=N` en los 4 HTML (los txt no lo necesitan)
 - **Textos**: estilo orgánico y natural, primera persona, frases cortas. Nada de frases de IA ("from the ground up", "meaningful experiences", "I leveraged X"). **Sin em dashes (—)**: reestructurar la frase en su lugar
 - **`grinch-2` ya es público** (el usuario lo desveló en ago 2026) con texto real
+- **Formato de página unificado** (el que el usuario aprobó): vídeo a la izquierda + ficha a dos columnas con la intro debajo a la derecha, luego texto de detalle sin imagen (`detail-image: none`) y galería. No romperlo sin que lo pida
+- **`home.intro` es un array de párrafos** por idioma en content.js (saludo de la home); se pinta con `textContent`, así que admite `<3` sin escapar
 
 ---
 
 ## Pendiente
 
-- Añadir thumb a `grinch-2` e imágenes a `on-fire` e `itch-gamejams`
 - Añadir la foto de perfil en `assets/images/about/photo.jpg` (About muestra placeholder mientras tanto)
 - Valorar reemplazar `resume.pdf` (actual: export de LinkedIn) por un PDF con mejor diseño
 - Las fechas del CV (`date` en content.js) son strings sin localizar — se muestran en inglés también en ES
+- `data/content.js → resume` y `about` siguen sin reflejar el rol de Lead Designer que ya aparece en la home
 
 ## Hecho (ago 2026)
 
