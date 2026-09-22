@@ -91,7 +91,7 @@ nav {
   margin-top: 1.25rem;
   font-size: 1rem;
   color: #444;
-  max-width: 56ch;
+  max-width: 52rem; /* ancho suelto: la presentación cabe en una línea */
   line-height: 1.7;
 }
 .home-intro p { margin-bottom: 0.55rem; }
