@@ -103,6 +103,23 @@ main .wrap { padding-block: 18px 40px; display: grid; grid-template-columns: min
 .st.mute { color: var(--muted); }
 .closures { margin: 0; font-size: 13.5px; color: var(--ink); }
 .closures b { font-weight: 600; }
+.states { display: flex; flex-wrap: wrap; gap: 6px; }
+.sb { height: 32px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--line); background: transparent; color: var(--muted); font: 600 13px var(--f-body); cursor: pointer; }
+.sb:focus-visible, .sync:focus-visible, .nt:focus-visible, .panel input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.sb[aria-pressed="true"] { border-color: transparent; }
+.sb-visitado[aria-pressed="true"] { background: var(--done); color: #fff; }
+.sb-revisitar[aria-pressed="true"], .sb-cerrado[aria-pressed="true"], .sb-no-localizado[aria-pressed="true"] { background: var(--rev); color: var(--card); }
+.nt { width: 100%; min-height: 56px; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font: 14px/1.4 var(--f-body); resize: vertical; }
+.sync { justify-self: start; display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 11px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font: 600 12.5px var(--f-body); cursor: pointer; }
+.sync::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.sync.ok::before { background: var(--done); }
+.sync.pending::before { background: var(--rev); }
+.sync.err::before { background: var(--bad); }
+.panel { display: grid; gap: 8px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); font-size: 13.5px; }
+.panel p { margin: 0; color: var(--muted); }
+.panel .row { display: flex; gap: 8px; }
+.panel input { flex: 1; min-width: 0; height: 36px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font: 15px var(--f-body); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .park { display: grid; grid-template-columns: 40px 1fr; gap: 12px; padding: 12px; border: 1.5px dashed var(--park); border-radius: 10px; }
 .pnum { width: 40px; height: 40px; border-radius: 8px; display: grid; place-items: center; background: var(--park); color: var(--card); font: 700 21px var(--f-display); }
 .opt { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--park); margin-bottom: 2px; }
@@ -122,6 +139,15 @@ main .wrap { padding-block: 18px 40px; display: grid; grid-template-columns: min
 <header class="bar">
   <div class="wrap">
     <div class="brand"><h1>Rutas Samuel</h1><span class="tot" id="tot"></span></div>
+    <button type="button" id="sync" class="sync" hidden></button>
+    <div id="syncpanel" class="panel" hidden>
+      <p>Los estados y notas se guardan en tu hoja de Google para verlos desde cualquier móvil u ordenador. Escribe el PIN que pusiste en el script. Solo hace falta una vez en cada dispositivo.</p>
+      <form id="pin-form" class="row">
+        <label class="sr" for="pin-in">PIN</label>
+        <input id="pin-in" type="password" inputmode="numeric" autocomplete="off" placeholder="PIN de la hoja">
+        <button type="submit" class="btn">Conectar</button>
+      </form>
+    </div>
     <nav class="days" id="days" aria-label="Jornadas"></nav>
   </div>
 </header>
@@ -134,10 +160,96 @@ const COLORS = ['#e6194b', '#3cb44b', '#4363d8', '#f58231', '#911eb4', '#008080'
 const NIGHT = '#3b3f8f';
 let ci = 0;
 DATA.forEach(d => { d.color = d.night ? NIGHT : COLORS[ci++ % COLORS.length]; });
-const KEY = 'rutas-samuel-estado-v1';
-let estado = {};
-try { estado = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { estado = {}; }
-const save = () => { try { localStorage.setItem(KEY, JSON.stringify(estado)); } catch (e) {} };
+// ---- Estado de las visitas: se guarda en el dispositivo y, si hay hoja configurada, en Google Sheets ----
+const SYNC_URL = 'https://script.google.com/macros/s/AKfycbxgjHC6T8IeyWnTP8TC7k5BAm94YZ8o98HJx0Ye-h25oAs7q8ynZ629p1LPuAme6RRQ1A/exec';   // aplicación web de Apps Script (protegida por PIN)
+const SYNC_ON = !!SYNC_URL && !/claude/.test(location.hostname);   // dentro de Claude no se puede conectar con Google
+const VKEY = 'rutas-samuel-visitas-v2', OKEY = 'rutas-samuel-pendientes-v1', PKEY = 'rutas-samuel-pin';
+const ESTADOS = ['Visitado', 'Revisitar', 'Cerrado', 'No localizado'];
+const REVISIT = new Set(['Revisitar', 'Cerrado', 'No localizado']);
+const load = (k, def) => { try { return JSON.parse(localStorage.getItem(k) || 'null') || def; } catch (e) { return def; } };
+const store = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+let V = load(VKEY, null);
+if (!V) {                 // marcas de la versión anterior ('ok' / 'rev')
+  const old = load('rutas-samuel-estado-v1', {}); V = {};
+  for (const id in old) V[id] = { estado: old[id] === 'ok' ? 'Visitado' : 'Revisitar', nota: '', ts: Date.now() };
+  store(VKEY, V);
+}
+let outbox = load(OKEY, {});
+let pin = (() => { try { return localStorage.getItem(PKEY) || ''; } catch (e) { return ''; } })();
+const st = id => (V[id] && V[id].estado) || 'Pendiente';
+const isDone = id => st(id) === 'Visitado';
+const needsRevisit = id => REVISIT.has(st(id));
+const noteOf = id => (V[id] && V[id].nota) || '';
+const META = {};
+DATA.forEach(d => d.stops.forEach(s => { META[s.id] = { local: s.name, ruta: d.code, jornada: d.day, cuando: d.label, parada: s.n }; }));
+
+function setVisit(id, patch) {
+  V[id] = { estado: st(id), nota: noteOf(id), ...patch, ts: Date.now() };
+  store(VKEY, V);
+  outbox[id] = { id, ...META[id], ...V[id] };
+  store(OKEY, outbox);
+  flushSoon();
+}
+
+let syncState = 'idle', syncError = '', flushTimer = null, busy = false;
+function flushSoon(ms = 800) { if (!SYNC_ON) return; clearTimeout(flushTimer); flushTimer = setTimeout(flush, ms); showSync(); }
+async function api(body) {
+  // text/plain evita la consulta previa CORS, que Apps Script no responde
+  const r = await fetch(SYNC_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ pin, ...body }) });
+  const j = await r.json();
+  if (!j.ok) throw new Error(j.error || 'Error de la hoja');
+  return j;
+}
+function fail(e) {
+  syncError = e.message || String(e);
+  syncState = /PIN/.test(syncError) ? 'pin' : (navigator.onLine === false || e instanceof TypeError) ? 'offline' : 'error';
+  showSync();
+}
+async function flush() {
+  if (!SYNC_ON || !pin || busy) return showSync();
+  const changes = Object.values(outbox);
+  if (!changes.length) { syncState = 'ok'; return showSync(); }
+  busy = true;
+  try {
+    await api({ changes });
+    changes.forEach(c => { if (outbox[c.id] && outbox[c.id].ts === c.ts) delete outbox[c.id]; });
+    store(OKEY, outbox);
+    syncState = Object.keys(outbox).length ? 'pending' : 'ok';
+  } catch (e) { fail(e); } finally { busy = false; showSync(); }
+}
+async function pull() {
+  if (!SYNC_ON || !pin) return showSync();
+  try {
+    let j = await api({ action: 'read' });
+    if (!Object.keys(j.rows).length) {          // hoja vacia: una fila por local, en el orden de las rutas
+      const rows = DATA.flatMap(d => d.stops.map(s => ({ id: s.id, ...META[s.id], estado: st(s.id), nota: noteOf(s.id), ts: (V[s.id] || {}).ts || 0 })));
+      j = await api({ action: 'seed', rows });
+    }
+    let changed = false;
+    for (const id in j.rows) {
+      const r = j.rows[id];
+      if (outbox[id] || !META[id]) continue;
+      if ((r.ts || 0) > ((V[id] || {}).ts || 0)) { V[id] = { estado: r.estado, nota: r.nota, ts: r.ts }; changed = true; }
+    }
+    if (changed) { store(VKEY, V); if (!document.activeElement || document.activeElement.tagName !== 'TEXTAREA') rerender(); }
+    syncState = Object.keys(outbox).length ? 'pending' : 'ok';
+    flush();
+  } catch (e) { fail(e); }
+  showSync();
+}
+function showSync() {
+  const b = document.getElementById('sync');
+  if (!b) return;
+  b.hidden = !SYNC_ON;
+  if (!SYNC_ON) return;
+  const n = Object.keys(outbox).length;
+  const [cls, txt] = !pin ? ['pending', 'Conectar con la hoja'] :
+    syncState === 'pin' ? ['err', 'PIN incorrecto'] :
+    syncState === 'offline' ? ['pending', `Sin conexión · ${n} por enviar`] :
+    syncState === 'error' ? ['err', 'No se pudo guardar'] :
+    n ? ['pending', `Guardando… (${n})`] : syncState === 'ok' ? ['ok', 'Guardado en la hoja'] : ['', 'Conectando…'];
+  b.className = 'sync ' + cls; b.textContent = txt; b.title = syncState === 'error' ? syncError : '';
+}
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const km = m => m >= 1000 ? (m / 1000).toFixed(1).replace('.', ',') + ' km' : m + ' m';
 const dest = s => new URL(s.nav).searchParams.get('destination');
@@ -154,11 +266,11 @@ function legText(s) {
 
 function renderChips() {
   const all = DATA.flatMap(d => d.stops);
-  const ok = all.filter(s => estado[s.id] === 'ok').length;
+  const ok = all.filter(s => isDone(s.id)).length;
   document.getElementById('tot').textContent = ok + ' / ' + all.length + ' visitadas';
   const nav = document.getElementById('days');
   nav.innerHTML = DATA.map(d => {
-    const full = d.stops.every(s => estado[s.id] === 'ok');
+    const full = d.stops.every(s => isDone(s.id));
     const wd = d.label ? d.label.replace(/^Semana \d · /, '').replace(' (noche)', '').slice(0, 3) : '';
     const txt = d.night ? `${d.day} · Noche` : `${d.day}${wd ? `<small>${wd}</small>` : ''}`;
     return `<button class="chip${full ? ' full' : ''}${d.night ? ' night' : ''}" style="--dc:${d.color}" aria-pressed="${d.key === day}" data-d="${d.key}" aria-label="${esc(d.label || 'Día ' + d.day)}"><span class="dot"></span>${txt}</button>`;
@@ -188,7 +300,7 @@ function mapSvg(stops, color) {
     const [x, y] = pt(i); const k = x.toFixed(0) + ',' + y.toFixed(0);
     const stack = seen[k] = (seen[k] || 0) + 1;
     if (stack > 1) return '';
-    const fill = estado[s.id] === 'ok' ? 'var(--done)' : color;
+    const fill = isDone(s.id) ? 'var(--done)' : color;
     return `<g><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="11" fill="${fill}" stroke="var(--card)" stroke-width="2"/><text x="${x.toFixed(1)}" y="${(y + 4.5).toFixed(1)}" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="13" fill="#fff">${s.n}</text></g>`;
   }).join('');
   const spanM = Math.round(Math.max(maxx - minx, (maxy - miny)) * 111320);
@@ -212,8 +324,9 @@ function parkRow(o) {
 }
 
 function stopRow(s, color, dayLabel) {
-  const st = estado[s.id] || '';
-  return `<li class="stop ${st}" style="--dc:${color}">
+  const cur = st(s.id), nt = noteOf(s.id);
+  const cls = isDone(s.id) ? 'ok' : needsRevisit(s.id) ? 'rev' : '';
+  return `<li class="stop ${cls}" style="--dc:${color}">
     <div class="num">${s.n}</div>
     <div class="body">
       <div><div class="nm">${esc(s.name)}</div><div class="ad">${esc(s.addr)} · ${esc(s.cp)}${dayLabel ? `<span class="from">${dayLabel}</span>` : ''}</div></div>
@@ -221,9 +334,12 @@ function stopRow(s, color, dayLabel) {
       <div class="acts">
         <a class="btn" href="${esc(s.nav)}" target="_blank" rel="noopener">Ir</a>
         <a class="btn sec" href="${esc(s.place)}" target="_blank" rel="noopener">Ficha</a>
-        <button class="tog t-ok" data-id="${s.id}" data-v="ok" aria-pressed="${st === 'ok'}">Visitado</button>
-        <button class="tog t-rev" data-id="${s.id}" data-v="rev" aria-pressed="${st === 'rev'}">Revisitar</button>
       </div>
+      <div class="states" role="group" aria-label="Estado de la visita">
+        ${ESTADOS.map(v => `<button type="button" class="sb sb-${v.toLowerCase().replace(/ /g, '-')}" data-id="${s.id}" data-v="${v}" aria-pressed="${cur === v}">${v}</button>`).join('')}
+        <button type="button" class="sb" data-note="${s.id}" aria-expanded="${!!nt}">Nota${nt ? ' ·' : ''}</button>
+      </div>
+      <textarea class="nt" id="nt-${s.id}" data-id="${s.id}" rows="2" placeholder="Nota de la visita: con quién hablaste, qué te dijeron…" ${nt ? '' : 'hidden'}>${esc(nt)}</textarea>
     </div></li>`;
 }
 
@@ -241,7 +357,7 @@ function tramoLinks(stops) {
 
 function renderDay(d) {
   const color = d.color;
-  const ok = d.stops.filter(s => estado[s.id] === 'ok').length;
+  const ok = d.stops.filter(s => isDone(s.id)).length;
   const zone = d.zone.split('  (')[0], cps = (d.zone.match(/\((.*)\)/) || [, ''])[1];
   let tr = '';
   d.tramos.forEach((t, i) => {
@@ -276,12 +392,12 @@ function renderDay(d) {
 
 function renderBuffer() {
   const tag = d => ({ day: d.day, dlabel: `Día ${d.day}${d.night ? ' (noche)' : ''}`, color: d.color });
-  const rev = DATA.flatMap(d => d.stops.filter(s => estado[s.id] === 'rev').map(s => ({ ...s, ...tag(d) })));
-  const pend = DATA.flatMap(d => d.stops.filter(s => !estado[s.id]).map(s => ({ ...s, ...tag(d) })));
+  const rev = DATA.flatMap(d => d.stops.filter(s => needsRevisit(s.id)).map(s => ({ ...s, ...tag(d) })));
+  const pend = DATA.flatMap(d => d.stops.filter(s => st(s.id) === 'Pendiente').map(s => ({ ...s, ...tag(d) })));
   let html = `<section class="dayhead"><span class="eyebrow">${BUF.label ? esc(BUF.label) + ' · ' : ''}Día ${BUFKEY} · Colchón</span><h2>Revisitas</h2>
-    <div class="stats"><span><b>${rev.length}</b> marcadas para revisitar</span><span><b>${pend.length}</b> sin marcar en días anteriores</span></div></section>`;
+    <div class="stats"><span><b>${rev.length}</b> por revisitar</span><span><b>${pend.length}</b> sin marcar en días anteriores</span></div></section>`;
   if (!rev.length) {
-    html += `<div class="empty">Aquí aparecerán los locales que marques como «Revisitar» durante los días 1 a 9: cerrados, sin encargado o pendientes de respuesta. Para cada uno tendrás el botón «Ir» y un enlace con la ruta completa.</div>`;
+    html += `<div class="empty">Aquí aparecerán los locales que marques como «Revisitar», «Cerrado» o «No localizado» durante los días 1 a 9. Para cada uno tendrás el botón «Ir», su nota y un enlace con la ruta completa.</div>`;
   } else {
     const links = tramoLinks(rev);
     const full = 'https://www.google.com/maps/dir/' + rev.map(s => encodeURIComponent(dest(s))).join('/');
@@ -289,21 +405,53 @@ function renderBuffer() {
       <section class="map">${mapSvg(rev.map((s, i) => ({ ...s, n: i + 1 })), '#8a5a00')}</section>
       <section><h3 class="section-t">Locales a revisitar</h3><ol class="stops">${rev.map((s, i) => stopRow({ ...s, n: i + 1 }, s.color, `${s.dlabel}, parada ${s.n}`)).join('<div class="leg"></div>')}</ol></section>`;
   }
-  html += `<p class="note">Las marcas «Visitado» y «Revisitar» se guardan solo en este navegador y en este dispositivo.</p>`;
+  html += `<p class="note">${SYNC_ON ? 'Los estados y notas se guardan en este dispositivo y en tu hoja de Google.' : 'Los estados y notas se guardan solo en este navegador y en este dispositivo.'}</p>`;
   return html;
 }
 
+function rerender() { const y = window.scrollY; render(); window.scrollTo(0, y); }
+
 function render() {
   renderChips();
+  showSync();
   const v = document.getElementById('view');
   v.innerHTML = day === BUFKEY ? renderBuffer() : renderDay(DATA.find(d => d.key === day));
-  v.querySelectorAll('.tog').forEach(b => b.addEventListener('click', () => {
+  v.querySelectorAll('.sb[data-v]').forEach(b => b.addEventListener('click', () => {
     const id = b.dataset.id, val = b.dataset.v;
-    if (estado[id] === val) delete estado[id]; else estado[id] = val;
-    save(); const y = window.scrollY; render(); window.scrollTo(0, y);
+    setVisit(id, { estado: st(id) === val ? 'Pendiente' : val });   // pulsar el estado activo lo quita
+    rerender();
   }));
+  v.querySelectorAll('[data-note]').forEach(b => b.addEventListener('click', () => {
+    const t = document.getElementById('nt-' + b.dataset.note);
+    t.hidden = !t.hidden; b.setAttribute('aria-expanded', String(!t.hidden));
+    if (!t.hidden) t.focus();
+  }));
+  v.querySelectorAll('textarea.nt').forEach(t => {
+    let tm;
+    const commit = () => { clearTimeout(tm); if (t.value !== noteOf(t.dataset.id)) setVisit(t.dataset.id, { nota: t.value }); };
+    t.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(commit, 900); });
+    t.addEventListener('blur', commit);
+  });
 }
+
+// panel de conexion con la hoja
+document.getElementById('sync').addEventListener('click', () => {
+  const p = document.getElementById('syncpanel'); p.hidden = !p.hidden;
+  if (!p.hidden) document.getElementById('pin-in').focus();
+});
+document.getElementById('pin-form').addEventListener('submit', ev => {
+  ev.preventDefault();
+  pin = document.getElementById('pin-in').value.trim();
+  try { localStorage.setItem(PKEY, pin); } catch (e) {}
+  syncState = 'idle'; showSync(); pull();
+  document.getElementById('syncpanel').hidden = true;
+});
+window.addEventListener('online', flush);
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') pull(); });
+setInterval(() => { if (Object.keys(outbox).length) flush(); }, 30000);
+
 render();
+pull();
 </script>
 </body>
 </html>
